@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+    <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/view.css}" />
+    <script th:src="@{/js/textarea.js}" type="text/javascript" defer></script>
+</head>
+<body>
+        <div th:replace="layout/header::header"></div>
+
+        <div class="container">
+            <div class="content-box">
+                <div class="view">
+                <!-- 뷰 -->
+                    <div th:if="${result} eq null">
+                        <span>없습니다.</span>
+                    </div>
+
+                    <div th:unless="${result} eq null">
+                        <div class="view-sub1" style="padding: 0 0 10px 0;" >
+                            <input readonly="readonly" id="title" type="text" style="width: 1200px; border: none; background-color: #f1f1f1; font-size: var(--font-large); border-radius: 4px; padding: 10px;" th:value="${result.getTitle()}" />
+                            <div style="padding: 10px 0 10px 0;">
+                                <span th:if="${result.getFirstimage()}  ne '없음'">
+                                    <img style="width: 1220px; height: 500px;" th:src="${result.getFirstimage()}">
+                                </span>
+                                <span th:unless="${result.getFirstimage()}  ne '없음'">
+                                    <img style="width: 1200px; height: 500px;" th:src="@{/image/Noimg.png}" alt="이미지 없음"><br>
+                                </span>
+                            </div>
+                            <input readonly="readonly" style="width: 1200px; border: none; background-color: #f1f1f1; font-size: var(--font-large); border-radius: 4px; padding: 10px; margin-bottom: 10px;" th:value="소개"/>
+                            <span style="padding: 0 0 10px 0;" th:text="${result.getOverview()}"></span>
+                        </div>
+
+                        <div class="view-sub2" th:if="${result.getAddr1()} ne '없음'">
+                            <input id="mapx" class="hidden" th:value="${result.getMapx()}" />
+                            <input id="mapy" class="hidden" th:value="${result.getMapy()}" />
+                            <input readonly="readonly" id="addr" style="width: 1200px; border: none; background-color: #f1f1f1; font-size: var(--font-large); border-radius: 4px; padding: 10px;" th:value="${result.getAddr1()}" />
+                            <div class="view-map" style="padding: 10px 0 10px 0;">
+                                <p style="margin-top:-12px; padding: 10px 0 10px 0;">
+                                    <em class="link">
+                                        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+                                            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+                                        </a>
+                                    </em>
+                                </p>
+                                <div id="map" style="width:100%;height:350px; margin-bottom: 10px;"></div>
+                                <p>
+                                    <button onclick="setDraggable(false)">지도 드래그 이동 끄기</button>
+                                    <button onclick="setDraggable(true)">지도 드래그 이동 켜기</button>
+                                </p>
+                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3bcffe69b58d95a5ab4325ea6fe8650&libraries=services,clusterer,drawing"></script>
+                                <script>
+                                    var title = document.getElementById('title').value;
+                                    var addr = document.getElementById('addr').value;
+
+                                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                                        mapOption = {
+                                            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                                            draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
+                                            level: 3 // 지도의 확대 레벨
+                                        };
+
+                                    // 지도를 생성합니다
+                                    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                                    // 주소-좌표 변환 객체를 생성합니다
+                                    var geocoder = new kakao.maps.services.Geocoder();
+
+                                    // 주소로 좌표를 검색합니다
+                                    geocoder.addressSearch(addr, function(result, status) {
+
+                                        // 정상적으로 검색이 완료됐으면
+                                        if (status === kakao.maps.services.Status.OK) {
+
+                                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                                            // 결과값으로 받은 위치를 마커로 표시합니다
+                                            var marker = new kakao.maps.Marker({
+                                                map: map,
+                                                position: coords
+                                            });
+
+                                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                            var infowindow = new kakao.maps.InfoWindow({
+                                                content: '<div style="width:150px;text-align:center;padding:6px 0;">'+ title + '<br>' + addr +'</div>'
+                                            });
+                                            infowindow.open(map, marker);
+
+                                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                            map.setCenter(coords);
+                                        }
+                                    });
+                                    // 버튼 클릭에 따라 지도 이동 기능을 막거나 풀고 싶은 경우에는 map.setDraggable 함수를 사용합니다
+                                    function setDraggable(draggable) {
+                                        // 마우스 드래그로 지도 이동 가능여부를 설정합니다
+                                        map.setDraggable(draggable);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div th:replace="layout/footer::footer"></div>
+</body>
+</html>

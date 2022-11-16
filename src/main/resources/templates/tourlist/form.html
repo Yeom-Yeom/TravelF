@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/form_T.css}" />
+
+    <script type="text/javascript">
+        function InsertBoard()
+        {
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const boardType = document.getElementById('boardType').value;
+
+            if("" == title){
+                alert("제목을 입력하세요");
+                document.getElementById('title').focus(); //입력포커스 이동
+                return; //함수 종료
+            }
+            if("" == content){
+                alert("내용을 입력하세요");
+                document.getElementById('content').focus();
+                return;
+            }
+            if("분류" == boardType){
+                alert("게시판 분류을 입력하세요");
+                document.getElementById('boardType').focus();
+                return;
+            }
+            document.formBoard.action= "saveBoard";
+            document.formBoard.submit();
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="content-box">
+            <div class="hidden" >
+                <h1 class="page-header" >게시글 등록</h1>
+            </div>
+
+            <form class="formBoard" name="formBoard" method="post" >
+                <div class="formBoard-board">
+                    <input id="id" name="id" type="hidden" th:value="${board?.id}" />
+
+                    <select class="form-control input-sm" id="boardType" name="boardType" >
+                        <option th:selected="${board?.boardType?.name() == ''}" >분류</option>
+                        <option th:value="notice" th:selected="${board?.boardType?.name() == 'notice'}">공지사항</option>
+                        <option th:value="free" th:selected="${board?.boardType?.name() == 'free'}">자유게시판</option>
+                    </select>
+
+                    <input id="title" name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" required
+                           class="col-md-1 form-control input-sm" th:value="${board?.title}" />
+                    <BR>
+
+                    <textarea id="content" name="content" class="col-md-1 form-control input-sm" maxlength="140" rows="7"
+                              placeholder="내용" th:text="${board?.content}" required></textarea><span class="help-block"></span>
+                    <BR>
+
+                </div>
+
+                <div class="formBoard-pull">
+
+                    <a href="/tourlist/board" ><span>목록으로</span></a>
+
+
+                    <div class="pull-right">
+                        <button th:if="!${board?.id}" type="button" id="btn_insert" style="border: none;" onclick=InsertBoard() >저장</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+</body>
+</html>

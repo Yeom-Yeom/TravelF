@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+    <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/modify.css}" />
+    <script th:src="@{/js/textarea.js}" type="text/javascript" defer></script>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="content-box">
+            <!-- 댓글 -->
+            <form class="formComment" name="formComment" method="post" action="/journal/updateComment">
+                <div class="review_info" >
+                    <input id="commentID" name="commentID" type="hidden" th:value="${comment?.id}" />
+                    <input id="journalID" name="journalID" type="hidden" th:value="${journalID}" />
+                    <input name="FAreaCode" type="hidden" th:value="${AreaCode}" />
+                    <input name="FJournalType" type="hidden" th:value="${JournalType}" />
+
+                    <div class="review_info_head">
+                        작성자: <span th:text="${comment?.user.userid}" style="margin-right: 10px;" autofocus></span>
+                        작성일: <span th:text="${comment?.modifiedDate}? ${#temporals.format(comment?.modifiedDate,'yyyy-MM-dd HH:mm')}: ${comment?.modifiedDate}" ></span>
+                    </div>
+                    <div class="review_info_main">
+                        <textarea id="reply" name="reply" maxlength="255" onfocus="resize(this)" th:text="${comment.reply}" ></textarea>
+                    </div>
+
+                    <div class="review_info_pro" >
+                        <div class="review_info_pro_btn">
+                            <button type="submit">수정하기</button>
+                            <a th:href="'/journal/deleteComment?journalID='+${journalID}+'&commentID='+${comment?.id} + '&JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" >삭제하기</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+</body>
+</html>

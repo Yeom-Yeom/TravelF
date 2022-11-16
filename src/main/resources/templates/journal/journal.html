@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TravelF</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/journal.css}" />
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <th:block th:if="${Journal_message} eq 'fail'" >
+        <script>
+            alert('로그인을 해주세요.');
+        </script>
+    </th:block>
+    <th:block th:if="${Journal_message} eq 'user'" >
+        <script>
+            alert('다른 사람의 일지입니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${Journal_message} eq 'save'" >
+        <script>
+            alert('일지가 등록되었습니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${Journal_message} eq 'update'" >
+        <script>
+            alert('일지가 수정되었습니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${Journal_message} eq 'delete'" >
+        <script>
+            alert('일지가 삭제되었습니다.');
+        </script>
+    </th:block>
+
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container" >
+        <div class="content-box">
+            <div class="journal">
+                <div class="aside" style="position: sticky; top: 20px; height: 100%;">
+
+                    <h2>종류</h2>
+                    <ul>
+                        <a th:href="'/journal/journal?JournalType=0&AreaCode='+${AreaCode}"><li>모두의 일지</li></a>
+                        <a th:href="'/journal/journal?JournalType=1&AreaCode='+${AreaCode}"><li>나만의 일지</li></a>
+                    </ul>
+                    <br>
+                    <h2>지역</h2>
+                    <ul>
+                        <a th:href="'/journal/journal?JournalType='+${JournalType}+'&AreaCode=0'"><li>전체</li></a>
+                        <a th:href="'/journal/journal?JournalType='+${JournalType}+'&AreaCode=1'"><li>서울</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=2'"><li>인천</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=3'"><li>대전</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=4'"><li>대구</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=5'"><li>광주</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=6'"><li>부산</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=7'"><li>울산</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=8'"><li>세종</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=31'"><li>경기도</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=32'"><li>강원도</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=33'"><li>충북</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=34'"><li>충남</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=35'"><li>경북</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=36'"><li>경남</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=37'"><li>전북</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=38'"><li>전남</li></a>
+                        <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=39'"><li>제주도</li></a>
+                    </ul>
+                </div>
+
+                <div class="journal-main" >
+                    <h2 class="hidden">main</h2>
+
+                    <div class="journal-main_info" style="display: flex; flex-wrap: wrap; justify-items: center;">
+                        <div th:each="pho : ${journalList}" style="padding: 5px;">
+                            <div class="photo" style="background-color: #ffffff; border: 1px solid black; display: flex; flex-direction: column; align-items: center; align-content: center; width: 188px; box-shadow: 1px 1px 1px black;" >
+                                <a th:href="'/journal/read?id=' + ${pho.getId()} + '&JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" >
+                                    <div th:if="${pho.getUploadPath()} eq null">
+                                        <img style="width: 178px; height: 150px; border: 1px solid black; margin: 5px;" th:src="@{/image/Noimg.png}" alt="이미지 없음">
+                                    </div>
+                                    <div th:unless="${pho.getUploadPath()} eq null">
+                                        <img style="width: 178px; height: 150px; border: 1px solid black; margin: 5px;" th:src="${pho.getUploadPath()}" alt="이미지 없음">
+                                    </div>
+                                    <div class="photo_info" style="width: 178px; background-color: #ffffff; margin: 5px;">
+                                        <p style="border: none; width: 178px;" th:text="${pho.title}"></p>
+                                        <p style="border: none; width: 178px;" th:text="${pho.getModifiedDate()}"></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottom-bar" >
+                        <!-- 페이지 번호 -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination"
+                                th:with="startNumber=(${T(java.lang.Math).floor(journalList.number/10)}*10+1), endNumber=((${journalList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${journalList.totalPages})">
+                                <th:block  th:if="${endNumber}">
+                                    <li>
+                                        <a aria-label="Previous" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=1'"><span>&laquo;</span></a>
+                                    </li>
+                                    <li th:style="${journalList.first} ? 'display:none'">
+                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.number}"><span>&lsaquo;</span></a>
+                                    </li>
+                                    <li class="active" th:each="page : ${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${journalList.number}+1) ? 'active': 'none'">
+                                        <a href="#" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${page}" th:text="${page}"><span class="sr-only"></span></a>
+                                    </li>
+                                    <li th:style="${journalList.last} ? 'display:none'">
+                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.number}+2"><span>&rsaquo;</span></a>
+                                    </li>
+                                    <li>
+                                        <a  aria-label="Next" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.totalPages}"><span>&raquo;</span></a>
+                                    </li>
+                                </th:block >
+                            </ul>
+                        </nav>
+
+                        <div class="pull-right" th:if="${login_message} ne null">
+                            <a th:href="'/journal/form?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" class="btn-block">등록</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+</body>
+</html>

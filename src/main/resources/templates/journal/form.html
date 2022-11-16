@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/form_J.css}" />
+    <script type="text/javascript">
+        function InsertJournal()
+        {
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const journalType = document.getElementById('journalType').value;
+            const areaCode = document.getElementById('areaCode').value;
+
+            if("" == title){
+                alert("제목을 입력하세요");
+                document.getElementById('title').focus(); //입력포커스 이동
+                return; //함수 종료
+            }
+            if("" == content){
+                alert("내용을 입력하세요");
+                document.getElementById('content').focus();
+                return;
+            }
+            if("분류" == journalType){
+                alert("분류을 입력하세요");
+                document.getElementById('journalType').focus();
+                return;
+            }
+            if("지역" == areaCode){
+                alert("지역을 입력하세요");
+                document.getElementById('areaCode').focus();
+                return;
+            }
+            document.formJournal.action= "saveJournal";
+            document.formJournal.submit();
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="content-box">
+            <div class="hidden" >
+                <h1 class="page-header" >게시글 등록</h1>
+            </div>
+
+            <form class="formJournal" name="formJournal" method="post" enctype="multipart/form-data">
+                <div class="formJournal-journal">
+                    <input id="id" name="id" type="hidden" th:value="${Journal?.id}" />
+
+                    <select class="form-control input-sm" id="journalType" name="journalType" >
+                        <option th:selected="${Journal?.journalType?.name() == ''}" >분류</option>
+                        <option th:value="alone" th:selected="${Journal?.journalType?.name() == 'alone'}">나만의 일지</option>
+                        <option th:value="everyone" th:selected="${Journal?.journalType?.name() == 'everyone'}">모두의 일지</option>
+                    </select>
+
+                    <select class="form-control input-sm" id="areaCode" name="areaCode" >
+                        <option th:selected="${Journal?.areaCode == ''}" >지역</option>
+                        <option th:selected="${Journal?.areaCode == '1'}" th:value="1">서울</option>
+                        <option th:selected="${Journal?.areaCode == '2'}" th:value="2">인천</option>
+                        <option th:selected="${Journal?.areaCode == '3'}" th:value="3">대전</option>
+                        <option th:selected="${Journal?.areaCode == '4'}" th:value="4">대구</option>
+                        <option th:selected="${Journal?.areaCode == '5'}" th:value="5">광주</option>
+                        <option th:selected="${Journal?.areaCode == '6'}" th:value="6">부산</option>
+                        <option th:selected="${Journal?.areaCode == '7'}" th:value="7">울산</option>
+                        <option th:selected="${Journal?.areaCode == '8'}" th:value="8">세종</option>
+                        <option th:selected="${Journal?.areaCode == '31'}" th:value="31">경기도</option>
+                        <option th:selected="${Journal?.areaCode == '32'}" th:value="32">강원도</option>
+                        <option th:selected="${Journal?.areaCode == '33'}" th:value="33">충북</option>
+                        <option th:selected="${Journal?.areaCode == '34'}" th:value="34">충남</option>
+                        <option th:selected="${Journal?.areaCode == '35'}" th:value="35">경북</option>
+                        <option th:selected="${Journal?.areaCode == '36'}" th:value="36">경남</option>
+                        <option th:selected="${Journal?.areaCode == '37'}" th:value="37">전북</option>
+                        <option th:selected="${Journal?.areaCode == '38'}" th:value="38">전남</option>
+                        <option th:selected="${Journal?.areaCode == '39'}" th:value="39">제주도</option>
+                    </select>
+
+                    <input id="title" name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" required
+                           class="col-md-1 form-control input-sm" th:value="${Journal?.title}" />
+
+                    <input type="file" name="file" />
+                    <BR>
+
+                    <textarea id="content" name="content" class="col-md-1 form-control input-sm" maxlength="140" rows="7"
+                              placeholder="내용" th:text="${Journal?.content}" required></textarea><span class="help-block"></span>
+                    <BR>
+
+                </div>
+
+                <div class="formJournal-pull">
+
+                    <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" ><span>목록으로</span></a>
+
+                    <div class="pull-right">
+                        <button th:if="!${Journal?.id}" type="button" id="btn_insert" style="border: none;" onclick=InsertJournal() >저장</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+</body>
+</html>

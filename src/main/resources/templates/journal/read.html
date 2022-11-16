@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+    <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/read_J.css}" />
+    <script type="text/javascript">
+        function UpdateJournal()
+        {
+            const id = document.getElementById('id').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const journalType = document.getElementById('journalType').value;
+            const areaCode = document.getElementById('areaCode').value;
+
+            if("" == title){
+                alert("제목을 입력하세요");
+                document.getElementById('title').focus(); //입력포커스 이동
+                return; //함수 종료
+            }
+            if("" == content){
+                alert("내용을 입력하세요");
+                document.getElementById('content').focus();
+                return;
+            }
+            if("분류" == journalType){
+                alert("일지의 분류을 입력하세요");
+                document.getElementById('journalType').focus();
+                return;
+            }
+            if("지역" == areaCode){
+                alert("일지의 지역을 입력하세요");
+                document.getElementById('areaCode').focus();
+                return;
+            }
+            document.formJournal.action= "updateJournal"
+            document.formJournal.submit();
+        }
+        function DeleteJournal()
+        {
+            const id = document.getElementById('id').value;
+            const journalType = document.getElementById('journalType').value;
+            const areaCode = document.getElementById('areaCode').value;
+
+            if("분류" == journalType){
+                alert("일지의 분류을 입력하세요");
+                document.getElementById('boardType').focus();
+                return;
+            }
+            if("지역" == areaCode){
+                alert("일지의 지역을 입력하세요");
+                document.getElementById('areaCode').focus();
+                return;
+            }
+            document.formJournal.action= "deleteJournal"
+            document.formJournal.submit();
+        }
+        function InsertComment()
+        {
+            const id2 = document.getElementById('id2').value;
+            const reply = document.getElementById('reply').value;
+
+            if("" == reply){
+                alert("내용을 입력하세요");
+                document.getElementById('reply').focus();
+                return;
+            }
+            document.formInsertComment.action= "saveComment";
+            document.formInsertComment.submit();
+        }
+        function UpdateComment()
+        {
+            const id3 = document.getElementById('id3').value;
+            const reply = document.getElementById('review').value;
+
+            if("" == reply){
+                alert("내용을 입력하세요");
+                document.getElementById('review').focus();
+                return;
+            }
+            document.href="'/tourlist/updateComment?boardID='+${board?.id}+'&commentID='+${comment.id}+'&reply='+${reply}";
+            document.$(this).attr("data-comment").submit();
+        }
+    </script>
+    <script th:src="@{/js/textarea.js}" type="text/javascript" defer></script>
+</head>
+<body>
+
+<div th:replace="layout/header::header"></div>
+
+<div class="container">
+    <div class="content-box">
+        <div class="hidden" >
+            <h1 class="page-header" >게시글 등록</h1>
+        </div>
+
+        <form class="formJournal" name="formJournal" method="post" >
+            <div class="formJournal-journal">
+                <div class="formJournal-journal_head">
+                    <input id="id" name="id" type="hidden" th:value="${Journal?.id}" />
+                    <input id="create_date" name="create_date" type="hidden" th:value="${Journal?.createdDate}" />
+                    <input id="FAreaCode" name="FAreaCode" type="hidden" th:value="${AreaCode}" />
+                    <input id="FJournalType" name="FJournalType" type="hidden" th:value="${JournalType}" />
+
+                    <div th:if="${Journal?.user?.userid} eq ${userid}">
+                        <select class="form-control input-sm" id="journalType" name="journalType" style="border: none;">
+                            <option th:selected="${Journal?.journalType?.name() == ''}" >분류</option>
+                            <option th:value="alone" th:selected="${Journal?.journalType?.name() == 'alone'}">나만의 일지</option>
+                            <option th:value="everyone" th:selected="${Journal?.journalType?.name() == 'everyone'}">모두의 일지</option>
+                        </select>
+                    </div>
+                    <div th:unless="${Journal?.user?.userid} eq ${userid}">
+                        <input name="journalType" type="hidden" th:if="${Journal?.journalType?.name()} eq 'alone'" th:value="alone"/>
+                        <input class="form-control input-sm" disabled="disabled" th:if="${Journal?.journalType?.name()} eq 'alone'"
+                               th:value="'나만의 일지'"  style="border: none;"/>
+                        <input name="journalType" type="hidden" th:if="${Journal?.journalType?.name()} eq 'everyone'" th:value="everyone"/>
+                        <input class="form-control input-sm" disabled="disabled" th:if="${Journal?.journalType?.name()} eq 'everyone'"
+                               th:value="'모두의 일지'" style="border: none;"/>
+                    </div>
+
+                    <div th:if="${Journal?.user?.userid} eq ${userid}">
+                        <select class="form-control input-sm" id="areaCode" name="areaCode" >
+                            <option th:selected="${Journal?.areaCode == ''}" >지역</option>
+                            <option th:selected="${Journal?.areaCode == '1'}" th:value="1">서울</option>
+                            <option th:selected="${Journal?.areaCode == '2'}" th:value="2">인천</option>
+                            <option th:selected="${Journal?.areaCode == '3'}" th:value="3">대전</option>
+                            <option th:selected="${Journal?.areaCode == '4'}" th:value="4">대구</option>
+                            <option th:selected="${Journal?.areaCode == '5'}" th:value="5">광주</option>
+                            <option th:selected="${Journal?.areaCode == '6'}" th:value="6">부산</option>
+                            <option th:selected="${Journal?.areaCode == '7'}" th:value="7">울산</option>
+                            <option th:selected="${Journal?.areaCode == '8'}" th:value="8">세종</option>
+                            <option th:selected="${Journal?.areaCode == '31'}" th:value="31">경기도</option>
+                            <option th:selected="${Journal?.areaCode == '32'}" th:value="32">강원도</option>
+                            <option th:selected="${Journal?.areaCode == '33'}" th:value="33">충북</option>
+                            <option th:selected="${Journal?.areaCode == '34'}" th:value="34">충남</option>
+                            <option th:selected="${Journal?.areaCode == '35'}" th:value="35">경북</option>
+                            <option th:selected="${Journal?.areaCode == '36'}" th:value="36">경남</option>
+                            <option th:selected="${Journal?.areaCode == '37'}" th:value="37">전북</option>
+                            <option th:selected="${Journal?.areaCode == '38'}" th:value="38">전남</option>
+                            <option th:selected="${Journal?.areaCode == '39'}" th:value="39">제주도</option>
+                        </select>
+                    </div>
+                    <div th:unless="${Journal?.user?.userid} eq ${userid}">
+                        <div th:if="${Journal?.areaCode == ''}">
+                            <input name="areaCode" type="hidden" th:value="0" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="전체" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '1'}">
+                            <input name="areaCode" type="hidden" th:value="1" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="서울" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '2'}">
+                            <input name="areaCode" type="hidden" th:value="2" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="인천" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '3'}">
+                            <input name="areaCode" type="hidden" th:value="3" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="대전" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '4'}">
+                            <input name="areaCode" type="hidden" th:value="4" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="대구" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '5'}">
+                            <input name="areaCode" type="hidden" th:value="5" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="광주" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '6'}">
+                            <input name="areaCode" type="hidden" th:value="6" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="부산" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '7'}">
+                            <input name="areaCode" type="hidden" th:value="7" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="울산" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '8'}">
+                            <input name="areaCode" type="hidden" th:value="8" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="세종" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '31'}">
+                            <input name="areaCode" type="hidden" th:value="31" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="경기도" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '32'}">
+                            <input name="areaCode" type="hidden" th:value="32" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="강원도" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '33'}">
+                            <input name="areaCode" type="hidden" th:value="33" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="충북" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '34'}">
+                            <input name="areaCode" type="hidden" th:value="34" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="충남" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '35'}">
+                            <input name="areaCode" type="hidden" th:value="35" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="경북" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '36'}">
+                            <input name="areaCode" type="hidden" th:value="36" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="경남" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '37'}">
+                            <input name="areaCode" type="hidden" th:value="37" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="전북" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '38'}">
+                            <input name="areaCode" type="hidden" th:value="38" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="전남" style="border: none;"/>
+                        </div>
+                        <div th:if="${Journal?.areaCode == '39'}">
+                            <input name="areaCode" type="hidden" th:value="39" style="border: none;"/>
+                            <input class="form-control input-sm"  disabled="disabled" th:value="제주도" style="border: none;"/>
+                        </div>
+                    </div>
+
+                    <input type="text" class="col-md-1 form-control input-sm" disabled="disabled" style="border: none;"
+                           th:if="${Journal?.id}" th:value="${Journal?.modifiedDate} ? ${#temporals.format(Journal.modifiedDate, 'yyyy-MM-dd HH:mm')} : ${Journal?.modifiedDate}" />
+
+                    <div th:if="${Journal?.user?.userid} eq ${userid}">
+                        <input id="title" name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" required
+                               class="col-md-1 form-control input-sm" th:value="${Journal?.title}" style="width: 1200px; border: none;" />
+                    </div>
+                    <div th:unless="${Journal?.user?.userid} eq ${userid}">
+                        <input  name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" disabled="disabled" required
+                                class="col-md-1 form-control input-sm" th:value="${Journal?.title}" style="width: 1200px; border: none;" />
+                    </div>
+                </div>
+                <BR>
+                <div th:if="${Journal?.getUploadPath()} eq null">
+                    <img style="width: 1220px; height: 500px;" th:src="@{/image/Noimg.png}"/>
+                </div>
+                <div th:unless="${Journal?.getUploadPath()} eq null">
+                    <img style="width: 1220px; height: 500px;" th:src="${Journal.getUploadPath()}"/>
+                </div>
+
+                <div class="formJournal-journal_main">
+                    <div th:if="${Journal?.user?.userid} eq ${userid}">
+                            <textarea id="content" name="content" class="col-md-1 form-control input-sm" maxlength="255"
+                                      placeholder="내용" th:text="${Journal?.content}" style="width: 1200px; border: none;" required></textarea>
+                    </div>
+                    <div th:unless="${Journal?.user?.userid} eq ${userid}">
+                            <textarea name="content" class="col-md-1 form-control input-sm" maxlength="255" disabled="disabled"
+                                      placeholder="내용" th:text="${Journal?.content}" style="width: 1200px; border: none;" required></textarea>
+                    </div>
+                </div>
+                <BR>
+            </div>
+
+            <div class="formJournal-pull">
+
+                <a th:href="'/journal/journal?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" ><span>목록으로</span></a>
+
+
+                <div class="pull-right">
+                    <div th:if="${Journal.user.userid} eq ${userid}">
+                        <button th:if="${Journal?.id}" type="button" id="btn_update" onclick=UpdateJournal() >수정</button>
+                        <button th:if="${Journal?.id}" type="button" id="btn_delete" onclick=DeleteJournal() >삭제</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <HR/>
+        <!-- 댓글 -->
+        <div class="comment-box">
+            <form class="formInsertComment" name="formInsertComment" encType = "multipart/form-data" method="post">
+                <input id="id2" name="id2" type="hidden" th:value="${Journal?.id}" />
+                <input name="FAreaCode" type="hidden" th:value="${AreaCode}" />
+                <input name="FJournalType" type="hidden" th:value="${JournalType}" />
+
+                <!-- 입력 -->
+                <div class="comment" th:if="${userid}">
+                    <div class="comment_head">
+                        작성자: <span id="replyUser" name="replyUser" th:text="${userid}" ></span>
+                    </div>
+                    <textarea id="reply" name="reply" class="col-md-1 form-control input-sm" maxlength="255"
+                              placeholder="댓글" required></textarea>
+                    <button type="button" class="right btn btn-info" id="replyRegist" style="border: none;" onclick=InsertComment() >등록하기</button>
+                </div>
+            </form>
+
+            <!-- 후기 -->
+            <div class="review" th:each="comment : ${commentList}">
+                <div class="review_info" >
+                    <input id="comment_id" name="id" type="hidden" th:value="${comment?.id}" />
+                    <input id="id3" name="id3" type="hidden" th:value="${Journal?.id}" />
+
+                    <div class="review_info_head">
+                        작성자: <span th:text="${comment?.user.userid}" style="margin-right: 10px;" autofocus></span>
+                        작성일: <span th:text="${comment?.modifiedDate}? ${#temporals.format(comment?.modifiedDate,'yyyy-MM-dd HH:mm')}: ${comment?.modifiedDate}" ></span>
+                        <div class="review_info_pro" th:if="${userid} eq ${comment?.user.userid}">
+                            <a onclick="return confirm('정말로 수정하시겠습니까?')" th:href="'/journal/modify?journalID='+${Journal?.id}+'&commentID='+${comment?.id} + '&JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" >
+                                <span><i class="fa fa-pen"></i>수정</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="review_info_main">
+                        <textarea  name="reply" maxlength="255" onfocus="resize(this)" readonly="readonly" style="border: none; background-color: #f2f2f2;" th:text="${comment.reply}" ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout/footer::footer"></div>
+</body>
+</html>

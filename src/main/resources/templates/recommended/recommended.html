@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF 홈페이지</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/recommended.css}" />
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div th:replace="layout/header::header"></div>
+<div class="container">
+    <div class="content-box">
+        <div class="attr-box" style="display: flex; flex-direction: column;" >
+            <div class="region_info">
+                <ul class="tag_list area_list js_one" id="arealist" style="display: flex;">
+                    <li id="전체"><a th:href="'/recommended/recommended?area=ALL&sigungu=ALL'" class="btn" title="선택됨"><span>전체</span></a></li><br>
+                    <li id="서울"><a th:href="'/recommended/recommended?area=서울&sigungu=' + ${sigungu}" class="btn"><span>서울</span></a></li><br>
+                    <li id="인천"><a th:href="'/recommended/recommended?area=인천&sigungu=' + ${sigungu}" class="btn"><span>인천</span></a></li><br>
+                    <li id="대전"><a th:href="'/recommended/recommended?area=대전&sigungu=' + ${sigungu}" class="btn"><span>대전</span></a></li><br>
+                    <li id="대구"><a th:href="'/recommended/recommended?area=대구&sigungu=' + ${sigungu}" class="btn"><span>대구</span></a></li><br>
+                    <li id="광주"><a th:href="'/recommended/recommended?area=광주&sigungu=' + ${sigungu}" class="btn"><span>광주</span></a></li><br>
+                    <li id="부산"><a th:href="'/recommended/recommended?area=부산&sigungu=' + ${sigungu}" class="btn"><span>부산</span></a></li><br>
+                    <li id="울산"><a th:href="'/recommended/recommended?area=울산&sigungu=' + ${sigungu}" class="btn"><span>울산</span></a></li><br>
+                    <li id="세종"><a th:href="'/recommended/recommended?area=세종&sigungu=' + ${sigungu}" class="btn"><span>세종</span></a></li><br>
+                    <li id="경기"><a th:href="'/recommended/recommended?area=경기&sigungu=' + ${sigungu}" class="btn"><span>경기</span></a></li><br>
+                    <li id="강원"><a th:href="'/recommended/recommended?area=강원&sigungu=' + ${sigungu}" class="btn"><span>강원</span></a></li><br>
+                    <li id="충북"><a th:href="'/recommended/recommended?area=충북&sigungu=' + ${sigungu}" class="btn"><span>충북</span></a></li><br>
+                    <li id="충남"><a th:href="'/recommended/recommended?area=충남&sigungu=' + ${sigungu}" class="btn"><span>충남</span></a></li><br>
+                    <li id="경북"><a th:href="'/recommended/recommended?area=경북&sigungu=' + ${sigungu}" class="btn"><span>경북</span></a></li><br>
+                    <li id="경남"><a th:href="'/recommended/recommended?area=경남&sigungu=' + ${sigungu}" class="btn"><span>경남</span></a></li><br>
+                    <li id="전북"><a th:href="'/recommended/recommended?area=전북&sigungu=' + ${sigungu}" class="btn"><span>전북</span></a></li><br>
+                    <li id="전남"><a th:href="'/recommended/recommended?area=전남&sigungu=' + ${sigungu}" class="btn"><span>전남</span></a></li><br>
+                    <li id="제주"><a th:href="'/recommended/recommended?area=제주&sigungu=' + ${sigungu}" class="btn"><span>제주</span></a></li><br>
+                </ul>
+
+                <ul th:if="${area} ne 'ALL'" class="tag_list area_view_list js_multi" id="sigungulist" style="display: flex; flex-wrap : wrap;" >
+                    <li id="sigunguAll"><a th:href="'/recommended/recommended?area=' + ${area} + '&sigungu=ALL'" class="btn_sgg" title="선택됨"><span>전체</span></a></li>
+                    <li th:each="sgg:${sigunguList}"><a th:href="'/recommended/recommended?area=' + ${area} + '&sigungu=' + ${sgg}" class="btn_sgg"><span th:text="${sgg}" style="width:50px;"></span></a></li>
+                </ul>
+            </div>
+
+            <div>
+                <input type="hidden" id="area" th:value="${area}" name="area"/>
+                <input type="hidden" id="sigungu" th:value="${sigungu}" name="sigungu"/>
+                <div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">음식&맛집</div>
+                    <div style="display: flex;"><a th:each="a:${food}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">가족여행</div>
+                    <div style="display: flex;"><a th:each="a:${family}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">관광지</div>
+                    <div style="display: flex;"><a th:each="a:${tour}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">데이트명소</div>
+                    <div style="display: flex;"><a th:each="a:${date}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img  th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">관광명소</div>
+                    <div style="display: flex;"><a th:each="a:${culture}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">산책로</div>
+                    <div style="display: flex;"><a th:each="a:${walk}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">레포츠</div>
+                    <div style="display: flex;"><a th:each="a:${reports}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">숙박</div>
+                    <div style="display: flex;"><a th:each="a:${sleep}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">사진명소</div>
+                    <div style="display: flex;"><a th:each="a:${photo}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">반려견</div>
+                    <div style="display: flex;"><a th:each="a:${dog}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                    <div style="border-radius: 4px; background-color: #f1f1f1; padding: 5px; margin: 10px;">계곡</div>
+                    <div style="display: flex;"><a th:each="a:${water}" th:href="'http://127.0.0.1:5000/?area='+${area}+'&sigungu='+${sigungu}+'&title='+${a.getTitle()}"><img th:src="${a.getFile_name()}" alt="이미지 없음" style="width:150px; height:150px; margin: 10px; border-radius: 4px;"></a></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="layout/footer::footer"></div>
+</body>
+</html>

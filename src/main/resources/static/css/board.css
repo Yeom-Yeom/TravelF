@@ -1,0 +1,61 @@
+
+.container { justify-content: center; min-width: 1280px; }
+.board { display: flex; padding: 40px 30px; }
+.board-main{ display:flex; flex-direction: column; justify-items: center; align-items: center;}
+
+.mainHide { display: flex; justify-content: center; padding-bottom: 40px; width: 1000px; }
+.mainHide table{ width: 100%; border-top: 1px solid #444444; border-collapse: collapse; }
+.mainHide table th{ border-bottom: 1px solid #444444; font-size: var(--font-medium); text-align: center; padding: 10px 4px;}
+.mainHide table td{ border-bottom: 1px solid #444444; text-align: center; padding: 4px;}
+
+.aside{ position: sticky; width: 200px; top: 20px; }
+.aside ul li
+{
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    margin: 4px;
+}
+.aside ul li:hover
+{
+    background-color: #e3e3e3;
+    border-radius: 4px;
+    height: inherit;
+}
+
+.pagination { display: flex; justify-content: center; }
+.pagination > li:first-child > a,
+.pagination > li:first-child > span { border-top-left-radius: 4px; border-bottom-left-radius: 4px;}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span { border-top-right-radius: 4px; border-bottom-right-radius: 4px;}
+.pagination > li > a,
+.pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.bottom-bar { display: flex; position: relative; justify-content: center; width: 1020px; }
+.pull-right { display: flex; }
+.pull-right a { display: flex; position: absolute; right: 40px; width: 50px; height: 36.85px;
+    align-items: center; justify-content:center; font-size: var(--font-small);
+    color: #f0f4f5; border-radius: 4px; background-color: #337ab7;
+    border-color: #337ab7; }
+.pull-right a:hover { background-color: #265a88;}
