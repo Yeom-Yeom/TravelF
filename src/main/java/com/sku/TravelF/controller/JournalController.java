@@ -34,16 +34,16 @@ public class JournalController {
     {
         if((JournalType.equals ("0") || JournalType.equals ("모두의 일지")) && AreaCode.equals ("0")){
             mav.addObject ("journalList", journalService.findJournalList (JournalType,pageable));
-        }
+        } //done
         else if((JournalType.equals ("1") || JournalType.equals ("나만의 일지")) &&AreaCode.equals ("0")){
             mav.addObject ("journalList", journalService.findJournalType (JournalType, pageable,session));
-        }
+        } //done
         else if((JournalType.equals ("0") || JournalType.equals ("모두의 일지")) && !AreaCode.equals ("0")){
-            mav.addObject ("journalList", journalService.findAreaCode (AreaCode, pageable));
-        }
+            mav.addObject ("journalList", journalService.findAreaCode (JournalType,AreaCode, pageable));
+        } //done
         else if((JournalType.equals ("1") || JournalType.equals ("나만의 일지")) && !AreaCode.equals ("0")){
             mav.addObject ("journalList", journalService.findJournalTypeAndAreaCode (JournalType, AreaCode, pageable, session));
-        }
+        } //done
 
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);

@@ -15,7 +15,7 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
     Journal findByUser(User user);
     Page<Journal> findAllByJournalTypeOrderByModifiedDateDesc(JournalType journalType, Pageable pageable);
     Page<Journal> findJournalByJournalTypeAndUserOrderByModifiedDateDesc(JournalType journalType, Pageable pageable, User user);
-    Page<Journal> findJournalByAreaCodeOrderByModifiedDateDesc(String areaCode, Pageable pageable);
-    Page<Journal> findJournalByJournalTypeAndUserAndAreaCodeOrderByModifiedDateDesc(JournalType journalType, String areaCode, Pageable pageable, User user);
+    Page<Journal> findJournalByJournalTypeAndAreaCodeOrderByModifiedDateDesc(JournalType journalType, String areaCode, Pageable pageable);
+    Page<Journal> findJournalByJournalTypeAndUserAndAreaCodeOrderByModifiedDateDesc(JournalType journalType, User user, String areaCode, Pageable pageable);
     List<Journal> findTop5ByJournalTypeOrderByModifiedDateDesc(JournalType journalType);
 }

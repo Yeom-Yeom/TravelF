@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/user/*")
 @RequiredArgsConstructor
-public class MemberController {
+public class UserController {
 
     final UserService memberService;
     private String Join_message = "";
@@ -22,7 +22,7 @@ public class MemberController {
 
     @RequestMapping("Join")
     public ModelAndView Join(ModelAndView mav) {
-        mav.setViewName("member/Join");
+        mav.setViewName("user/Join");
         mav.addObject("Join_message", Join_message);
         return mav;
     }
@@ -47,7 +47,7 @@ public class MemberController {
 
     @GetMapping("login")
     public ModelAndView login(ModelAndView mav) {
-        mav.setViewName("member/login");
+        mav.setViewName("user/login");
         mav.addObject("Join_message", Join_message);
         mav.addObject("login_message", login_message);
         return mav;
@@ -59,7 +59,7 @@ public class MemberController {
         User name = memberService.LoginCheck(member, session);
 
         if (name != null) { // 로그인 성공 시
-            mav.setViewName("redirect:/tourlist"); // 뷰의 이름
+            mav.setViewName("redirect:/travelf"); // 뷰의 이름
             Join_message = "";
             login_message = "";
         } else { // 로그인 실패 시

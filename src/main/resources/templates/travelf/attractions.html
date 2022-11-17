@@ -46,7 +46,7 @@
                     <div class="attr" th:if="${result} ne null" >
                         <span th:each="Tour : ${result}">
                             <li >
-                                <a th:href="'/tourlist/view?contentId='+ ${Tour.getContentid()}" >
+                                <a th:href="'/travelf/view?contentId='+ ${Tour.getContentid()}" >
                                     <div class="info" style="height: 150px;">
                                         <span th:if="${Tour.getFirstimage()}  ne '없음'">
                                             <img style="width: 200px; height: 150px;" th:src="${Tour.getFirstimage()}"><br>

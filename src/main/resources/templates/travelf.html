@@ -13,7 +13,7 @@
   <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{/css/base.css}" />
   <link rel="stylesheet" th:href="@{/css/tourlist.css}" />
-  <script th:src="@{/js/tourlist.js}" type="text/javascript" defer></script>
+  <script th:src="@{/js/travelf.js}" type="text/javascript" defer></script>
 </head>
 <body>
 <!-- ---------------------------<header>--------------------------------------- -->
@@ -31,13 +31,13 @@
         <div class="outer" >
           <div class="inner-list">
             <div class="inner">
-              <a href="/tourlist/region"><img th:src="@{/image/forest.png}" alt="이미지 없음"></a>
+              <a href="/travelf/region"><img th:src="@{/image/forest.png}" alt="이미지 없음"></a>
             </div>
             <div class="inner">
-              <a href="/tourlist/region"><img th:src="@{/image/sea.png}" alt="이미지 없음"></a>
+              <a href="/travelf/region"><img th:src="@{/image/sea.png}" alt="이미지 없음"></a>
             </div>
             <div class="inner">
-              <a href="/tourlist/region"><img th:src="@{/image/palace.png}" alt="이미지 없음"></a>
+              <a href="/travelf/region"><img th:src="@{/image/palace.png}" alt="이미지 없음"></a>
             </div>
           </div>
           <button type="button" class="button-left"></button>
@@ -101,10 +101,10 @@
 
               <div style="display: flex; justify-content: space-between; background-color: #f1f1f1; border-radius: 4px;">
                 <h2>공지사항</h2>
-                <a th:href="'/tourlist/board?boardType=공지사항'">more</a>
+                <a th:href="'/travelf/board?boardType=공지사항'">more</a>
               </div>
               <div th:each="board:${result1}" style="padding: 10px 5px;">
-                <a th:href="'/tourlist/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
+                <a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
               </div>
             </div>
 
@@ -112,10 +112,10 @@
 
               <div style="display: flex; justify-content: space-between; background-color: #f1f1f1; border-radius: 4px;">
                 <h2>자유게시판</h2>
-                <a th:href="'/tourlist/board?boardType=자유게시판'">more</a>
+                <a th:href="'/travelf/board?boardType=자유게시판'">more</a>
               </div>
               <div th:each="board:${result2}" style="padding: 10px 5px;">
-                <a th:href="'/tourlist/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
+                <a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
               </div>
           </div>
         </div>

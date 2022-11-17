@@ -82,7 +82,7 @@ body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
     color : var(--white-color);
 }
 .header .cont .main-menu li{
-    padding: 5px 8px;
+    padding: 10px 8px;
 }
 .member-menu li:hover {
     border-radius: 4px; background-color: var(--logo-color);

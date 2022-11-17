@@ -21,7 +21,7 @@ import java.util.UUID;
 public class JournalServiceImpl implements JournalService{
     private final JournalRepository journalRepository;
     private final ImageService imageService;
-    private final UserService memberService;
+    private final UserService userService;
 
 
     // 페이징 처리된 모든 게시물 반환
@@ -49,13 +49,21 @@ public class JournalServiceImpl implements JournalService{
             Type = null;
         }
         pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
-        return journalRepository.findJournalByJournalTypeAndUserOrderByModifiedDateDesc(Type, pageable,memberService.findUser(session));
+        return journalRepository.findJournalByJournalTypeAndUserOrderByModifiedDateDesc(Type, pageable, userService.findUser(session));
     }
 
     // 페이징 처리된 특정 지역 게시물 반환
-    public Page<Journal> findAreaCode(String areaCode, Pageable pageable) {
+    public Page<Journal> findAreaCode(String journalType, String areaCode, Pageable pageable) {
+        JournalType Type;
+        if(journalType.equals ("1")){
+            Type = JournalType.alone;
+        }else if(journalType.equals ("0")){
+            Type = JournalType.everyone;
+        }else {
+            Type = null;
+        }
         pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
-        return journalRepository.findJournalByAreaCodeOrderByModifiedDateDesc (areaCode, pageable);
+        return journalRepository.findJournalByJournalTypeAndAreaCodeOrderByModifiedDateDesc (Type,areaCode, pageable);
     }
 
     // 페이징 처리된 특정 타입과 특정 지역 게시물 반환
@@ -69,8 +77,8 @@ public class JournalServiceImpl implements JournalService{
             Type = null;
         }
         pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
-        System.out.println("asdf : "+memberService.findUser(session));
-        return journalRepository.findJournalByJournalTypeAndUserAndAreaCodeOrderByModifiedDateDesc(Type, areaCode, pageable, memberService.findUser(session));
+        System.out.println("asdf : " + userService.findUser(session));
+        return journalRepository.findJournalByJournalTypeAndUserAndAreaCodeOrderByModifiedDateDesc(Type, userService.findUser(session), areaCode, pageable);
     }
 
     // 탑5 조회

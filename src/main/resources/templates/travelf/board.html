@@ -58,9 +58,9 @@
                 <div class="aside">
                     <h2>종류</h2>
                     <ul>
-                        <a th:href="'/tourlist/board?boardType=전체'"><li>전체</li></a>
-                        <a th:href="'/tourlist/board?boardType=공지사항'"><li>공지사항</li></a>
-                        <a th:href="'/tourlist/board?boardType=자유게시판'"><li>자유게시판</li></a>
+                        <a th:href="'/travelf/board?boardType=전체'"><li>전체</li></a>
+                        <a th:href="'/travelf/board?boardType=공지사항'"><li>공지사항</li></a>
+                        <a th:href="'/travelf/board?boardType=자유게시판'"><li>자유게시판</li></a>
                     </ul>
                 </div>
 
@@ -81,7 +81,7 @@
                             <tr th:each="board : ${boardList}" >
                                 <!--<td th:text="${board.id}"></td>-->
                                 <td th:text="${board.boardType.value}"></td>
-                                <td><a th:href="'/tourlist/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a></td>
+                                <td><a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a></td>
                                 <td th:text="${board.user.userid}"></td>
                                 <!--<td th:text="${board.createdDate}? ${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')}: ${board.createdDate}"></td>-->
                                 <td th:text="${board.modifiedDate}? ${#temporals.format(board.modifiedDate,'yyyy-MM-dd HH:mm')}: ${board.modifiedDate}"></td>
@@ -97,26 +97,26 @@
                                 th:with="startNumber=(${T(java.lang.Math).floor(boardList.number/10)}*10+1), endNumber=((${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages})">
                                 <th:block  th:if="${endNumber}">
                                     <li>
-                                        <a aria-label="Previous" th:href="'/tourlist/board?boardType='+ ${boardType} + '&page=1'"><span>&laquo;</span></a>
+                                        <a aria-label="Previous" th:href="'/travelf/board?boardType='+ ${boardType} + '&page=1'"><span>&laquo;</span></a>
                                     </li>
                                     <li th:style="${boardList.first} ? 'display:none'">
-                                        <a th:href="'/tourlist/board?boardType=' + ${boardType} + '&page=' + ${boardList.number}"><span>&lsaquo;</span></a>
+                                        <a th:href="'/travelf/board?boardType=' + ${boardType} + '&page=' + ${boardList.number}"><span>&lsaquo;</span></a>
                                     </li>
                                     <li class="active" th:each="page : ${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active': 'none'">
-                                        <a href="#" th:href="'/tourlist/board?boardType=' + ${boardType} + '&page=' +${page}" th:text="${page}"><span class="sr-only"></span></a>
+                                        <a href="#" th:href="'/travelf/board?boardType=' + ${boardType} + '&page=' +${page}" th:text="${page}"><span class="sr-only"></span></a>
                                     </li>
                                     <li th:style="${boardList.last} ? 'display:none'">
-                                        <a th:href="'/tourlist/board?boardType=' + ${boardType} + '&page=' + ${boardList.number}+2"><span>&rsaquo;</span></a>
+                                        <a th:href="'/travelf/board?boardType=' + ${boardType} + '&page=' + ${boardList.number}+2"><span>&rsaquo;</span></a>
                                     </li>
                                     <li>
-                                        <a  aria-label="Next" th:href="'/tourlist/board?boardType=' + ${boardType} + '&page=' + ${boardList.totalPages}"><span>&raquo;</span></a>
+                                        <a  aria-label="Next" th:href="'/travelf/board?boardType=' + ${boardType} + '&page=' + ${boardList.totalPages}"><span>&raquo;</span></a>
                                     </li>
                                 </th:block >
                             </ul>
                         </nav>
 
                         <div class="pull-right" th:if="${login_message} ne null">
-                            <a href="/tourlist/form" class="btn-block">등록</a>
+                            <a href="/travelf/form" class="btn-block">등록</a>
                         </div>
                     </div>
                 </div>

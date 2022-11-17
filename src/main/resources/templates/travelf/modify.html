@@ -30,7 +30,7 @@
     <div class="container">
         <div class="content-box">
             <!-- 댓글 -->
-            <form class="formComment" name="formComment" method="post" action="/tourlist/updateComment">
+            <form class="formComment" name="formComment" method="post" action="/travelf/updateComment">
                 <div class="review_info" >
                     <input id="commentID" name="commentID" type="hidden" th:value="${comment?.id}" /> <!-- (5) 6 7-->
                     <input id="boardID" name="boardID" type="hidden" th:value="${boardID}" />
@@ -46,7 +46,7 @@
                     <div class="review_info_pro" >
                         <div class="review_info_pro_btn">
                             <button type="submit">수정하기</button>
-                            <a th:href="'/tourlist/deleteComment?boardID='+${boardID}+'&commentID='+${comment?.id}" >삭제하기</a>
+                            <a th:href="'/travelf/deleteComment?boardID='+${boardID}+'&commentID='+${comment?.id}" >삭제하기</a>
                         </div>
                     </div>
                 </div>

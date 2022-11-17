@@ -9,17 +9,17 @@
                 <h1 class="hidden">로고</h1>
                 <div class="member-logo">
                     <i class="fas fa-bars"></i>
-                    <a href="/tourlist">TravelF</a>
+                    <a href="/travelf">TravelF</a>
                 </div>
 
                 <h1 class="hidden">회원메뉴</h1>
                 <ul class="member-menu" >
                     <li>
                         <th:block th:if="${login_message} eq null" >
-                            <a href="/member/login" ><b>로그인</b></a>
+                            <a href="/user/login"><b>로그인</b></a>
                         </th:block>
                         <th:block th:if="${login_message} ne null" >
-                            <a href="/member/logout" >
+                            <a href="/user/logout">
                                 <span th:text="${login_message} + '님 환영합니다.'"></span>
                                 <br>
                                 <font color="#c00000" ><b>로그아웃</b></font>
@@ -31,10 +31,10 @@
             <div class="cont">
                 <h1 class="hidden">메인메뉴</h1>
                 <ul class="main-menu">
-                    <li><a href = "/tourlist/region" ><span><b>여행지 명소</b></span></a></li>
+                    <li><a href = "/travelf/region" ><span><b>여행지 명소</b></span></a></li>
                     <li><a href = "/journal/journal" ><span><b>여행일지</b></span></a></li>
                     <li><a href = "/recommended/recommended" ><span><b>여행추천</b></span></a></li>
-                    <li><a href = "/tourlist/board" ><span><b>게시판</b></span></a></li>
+                    <li><a href = "/travelf/board" ><span><b>게시판</b></span></a></li>
                 </ul>
             </div>
         </div>
