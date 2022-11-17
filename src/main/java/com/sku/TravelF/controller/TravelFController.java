@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/travelf/*")
 @RequiredArgsConstructor
-public class TourListController {
+public class TravelFController {
 
     private final ApiService apiService;
     private final CommentService commentService;

@@ -16,12 +16,13 @@
                 <ul class="member-menu" >
                     <li>
                         <th:block th:if="${login_message} eq null" >
-                            <a href="/user/login"><b>로그인</b></a>
+                            <a href="/user/login"><b>로그인</b></a><br>
+                            <a href="/user/Join"><b>회원가입</b></a>
                         </th:block>
                         <th:block th:if="${login_message} ne null" >
+                            <span th:text="${login_message} + '님 환영합니다.'"></span>
+                            <br>
                             <a href="/user/logout">
-                                <span th:text="${login_message} + '님 환영합니다.'"></span>
-                                <br>
                                 <font color="#c00000" ><b>로그아웃</b></font>
                             </a>
                         </th:block>
@@ -33,7 +34,7 @@
                 <ul class="main-menu">
                     <li><a href = "/travelf/region" ><span><b>여행지 명소</b></span></a></li>
                     <li><a href = "/journal/journal" ><span><b>여행일지</b></span></a></li>
-                    <li><a href = "/recommended/recommended" ><span><b>여행추천</b></span></a></li>
+                    <li><a href = "/recommended/recommended" ><span><b>여행지 추천</b></span></a></li>
                     <li><a href = "/travelf/board" ><span><b>게시판</b></span></a></li>
                 </ul>
             </div>

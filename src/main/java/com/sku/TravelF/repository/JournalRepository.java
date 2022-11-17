@@ -12,10 +12,18 @@ import java.util.List;
 
 @Repository
 public interface JournalRepository extends JpaRepository<Journal, Long> {
-    Journal findByUser(User user);
     Page<Journal> findAllByJournalTypeOrderByModifiedDateDesc(JournalType journalType, Pageable pageable);
-    Page<Journal> findJournalByJournalTypeAndUserOrderByModifiedDateDesc(JournalType journalType, Pageable pageable, User user);
+    Page<Journal> findAllByJournalTypeAndTitleContainingOrderByModifiedDateDesc(JournalType journalType, String title, Pageable pageable);
+
+    Page<Journal> findJournalByJournalTypeAndUserOrderByModifiedDateDesc(JournalType journalType, User user, Pageable pageable);
+    Page<Journal> findJournalByJournalTypeAndTitleContainingAndUserOrderByModifiedDateDesc(JournalType journalType, String title, User user, Pageable pageable);
+
     Page<Journal> findJournalByJournalTypeAndAreaCodeOrderByModifiedDateDesc(JournalType journalType, String areaCode, Pageable pageable);
-    Page<Journal> findJournalByJournalTypeAndUserAndAreaCodeOrderByModifiedDateDesc(JournalType journalType, User user, String areaCode, Pageable pageable);
+    Page<Journal> findJournalByJournalTypeAndAreaCodeAndTitleContainingOrderByModifiedDateDesc(JournalType journalType, String areaCode, String title, Pageable pageable);
+
+    Page<Journal> findJournalByJournalTypeAndAreaCodeAndUserOrderByModifiedDateDesc(JournalType journalType, String areaCode, User user, Pageable pageable);
+    Page<Journal> findJournalByJournalTypeAndAreaCodeAndTitleContainingAndUserOrderByModifiedDateDesc(JournalType journalType, String areaCode, String title, User user, Pageable pageable);
+
+    Journal findByUser(User user);
     List<Journal> findTop5ByJournalTypeOrderByModifiedDateDesc(JournalType journalType);
 }

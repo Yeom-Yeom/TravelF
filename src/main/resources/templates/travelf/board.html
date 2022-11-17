@@ -56,6 +56,13 @@
             <h1 class="hidden">게시글 목록</h1>
             <div class="board" >
                 <div class="aside">
+                    <form name="formSearch" class="formSearch" method="get" action="/travelf/board">
+                        <div class="search-by-user">
+                            <input type="hidden" id="BoardType" name="BoardType" th:value="${BoardType}"/>
+                            <input type="text" id="Search" name="Search"/>
+                            <button type="submit">검색하기</button>
+                        </div>
+                    </form>
                     <h2>종류</h2>
                     <ul>
                         <a th:href="'/travelf/board?boardType=전체'"><li>전체</li></a>

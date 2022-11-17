@@ -30,23 +30,24 @@ public class JournalController {
 
     @GetMapping({"journal", "journal/"})
     public ModelAndView journal(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
-                                @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav)
+                                @RequestParam(value = "Search", defaultValue = "0") String Search, @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav)
     {
         if((JournalType.equals ("0") || JournalType.equals ("모두의 일지")) && AreaCode.equals ("0")){
-            mav.addObject ("journalList", journalService.findJournalList (JournalType,pageable));
+            mav.addObject ("journalList", journalService.findJournalList (JournalType, Search, pageable));
         } //done
         else if((JournalType.equals ("1") || JournalType.equals ("나만의 일지")) &&AreaCode.equals ("0")){
-            mav.addObject ("journalList", journalService.findJournalType (JournalType, pageable,session));
+            mav.addObject ("journalList", journalService.findJournalType (JournalType, Search, pageable,session));
         } //done
         else if((JournalType.equals ("0") || JournalType.equals ("모두의 일지")) && !AreaCode.equals ("0")){
-            mav.addObject ("journalList", journalService.findAreaCode (JournalType,AreaCode, pageable));
+            mav.addObject ("journalList", journalService.findAreaCode (JournalType, AreaCode, Search, pageable));
         } //done
         else if((JournalType.equals ("1") || JournalType.equals ("나만의 일지")) && !AreaCode.equals ("0")){
-            mav.addObject ("journalList", journalService.findJournalTypeAndAreaCode (JournalType, AreaCode, pageable, session));
+            mav.addObject ("journalList", journalService.findJournalTypeAndAreaCode (JournalType, AreaCode, Search, pageable, session));
         } //done
 
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);
+        mav.addObject("Search",Search);
         mav.addObject("Journal_message", Journal_message);
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.setViewName("journal/journal"); // 뷰의 이름
@@ -122,7 +123,7 @@ public class JournalController {
 
     @GetMapping({"form", "form/"})
     public ModelAndView form(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
-            @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+                             @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
         mav.addObject ("Journal", journalService.findJournalById (id));
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);

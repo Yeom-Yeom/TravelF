@@ -50,15 +50,18 @@
     </th:block>
 
     <div th:replace="layout/header::header"></div>
-
     <div class="container" >
         <div class="content-box">
             <div class="journal">
                 <div class="aside" style="position: sticky; top: 20px; height: 100%;">
-                    <div class="search-by-user" style="display:flex;">
-                        <input type="text"/>
-                        <button type="submit">검색하기</button>
-                    </div>
+                    <form name="formSearch" class="formSearch" method="get" action="/journal/journal">
+                        <div class="search-by-user">
+                            <input type="hidden" id="JournalType" name="JournalType" th:value="${JournalType}"/>
+                            <input type="hidden" id="AreaCode" name="AreaCode" th:value="${AreaCode}"/>
+                            <input type="text" id="Search" name="Search"/>
+                            <button type="submit">검색하기</button>
+                        </div>
+                    </form>
                     <h2>종류</h2>
                     <ul>
                         <a th:href="'/journal/journal?JournalType=0&AreaCode='+${AreaCode}"><li>모두의 일지</li></a>

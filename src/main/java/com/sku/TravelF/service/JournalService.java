@@ -9,10 +9,10 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface JournalService {
-    public Page<Journal> findJournalList(String journalType,Pageable pageable);
-    public Page<Journal> findJournalType(String journalType, Pageable pageable, HttpSession session);
-    public Page<Journal> findAreaCode(String journalType, String areaCode, Pageable pageable);
-    public Page<Journal> findJournalTypeAndAreaCode(String journalType, String areaCode, Pageable pageable,HttpSession session);
+    public Page<Journal> findJournalList(String journalType, String Search,Pageable pageable);
+    public Page<Journal> findJournalType(String journalType, String Search, Pageable pageable, HttpSession session);
+    public Page<Journal> findAreaCode(String journalType, String areaCode, String Search, Pageable pageable);
+    public Page<Journal> findJournalTypeAndAreaCode(String journalType, String areaCode, String Search, Pageable pageable,HttpSession session);
     public List<Journal> findTop5();
     public Journal findJournalById(Long id);
     public void save(Journal journal, MultipartFile file) throws Exception;
