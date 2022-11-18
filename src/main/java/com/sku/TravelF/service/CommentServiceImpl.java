@@ -1,7 +1,7 @@
 package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Comment;
-import com.sku.TravelF.repository.CommentRepository;
+import com.sku.TravelF.domain.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

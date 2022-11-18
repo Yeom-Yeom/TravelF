@@ -2,7 +2,7 @@ package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Board;
 import com.sku.TravelF.domain.enums.BoardType;
-import com.sku.TravelF.repository.BoardRepository;
+import com.sku.TravelF.domain.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

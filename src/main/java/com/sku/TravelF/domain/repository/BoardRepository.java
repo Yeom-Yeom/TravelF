@@ -1,4 +1,4 @@
-package com.sku.TravelF.repository;
+package com.sku.TravelF.domain.repository;
 
 import com.sku.TravelF.domain.Board;
 import com.sku.TravelF.domain.User;

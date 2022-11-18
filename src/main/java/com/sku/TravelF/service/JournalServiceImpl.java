@@ -2,7 +2,7 @@ package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Journal;
 import com.sku.TravelF.domain.enums.JournalType;
-import com.sku.TravelF.repository.JournalRepository;
+import com.sku.TravelF.domain.repository.JournalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
