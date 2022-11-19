@@ -1,4 +1,4 @@
-package com.sku.TravelF.domain.repository;
+package com.sku.TravelF.repository;
 
 import com.sku.TravelF.domain.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
