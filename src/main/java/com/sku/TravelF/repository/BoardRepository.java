@@ -1,4 +1,4 @@
-package com.sku.TravelF.domain.repository;
+package com.sku.TravelF.repository;
 
 import com.sku.TravelF.domain.Board;
 import com.sku.TravelF.domain.User;
@@ -12,8 +12,13 @@ import java.util.List;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    Board findByUser(User user);
-    Page<Board> findBoardByBoardTypeOrderByModifiedDateDesc(BoardType boardType, Pageable pageable);
+
     Page<Board> findAllByOrderByModifiedDateDesc(Pageable pageable);
+    Page<Board> findAllByTitleContainingOrderByModifiedDateDesc(String title, Pageable pageable);
+
+    Page<Board> findBoardByBoardTypeOrderByModifiedDateDesc(BoardType boardType, Pageable pageable);
+    Page<Board> findBoardByBoardTypeAndTitleContainingOrderByModifiedDateDesc(BoardType boardType, String title, Pageable pageable);
+
+    Board findByUser(User user);
     List<Board> findTop5ByBoardTypeOrderByModifiedDateDesc(BoardType boardType);
 }

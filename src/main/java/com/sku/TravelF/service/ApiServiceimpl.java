@@ -2,7 +2,11 @@ package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Tour;
 //import com.sku.TourList.repository.TourRepository;
+import com.sku.TravelF.repository.ApiRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,8 +22,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ApiServiceimpl implements ApiService{
-    //TourRepository tourRepository;
+public class ApiServiceImpl implements ApiService{
+    private final ApiRepository apiRepository;
     // 지역 조회 코드, 지역 기반, 공통정보
     // tag값의 정보를 가져오는 메소드
     private static String getTagValue(String tag, Element eElement) {
@@ -168,7 +172,7 @@ public class ApiServiceimpl implements ApiService{
                         tour.setZipcode (getTagValue ("zipcode", eElement));
 
                         result.add (tour);
-                        //Tour savedTour = tourRepository.save (tour);
+                        //apiRepository.save (tour);
                     }	// if end
                 }	// for end
 
@@ -259,6 +263,16 @@ public class ApiServiceimpl implements ApiService{
             e.printStackTrace ();
         }
         return result;
+    }
+
+    @Override
+    public Page<Tour> findTour(String areaCode, String sigunguCode, String search, Pageable pageable){
+        pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
+
+        if(search.equals ("0"))
+            return apiRepository.findByAreacodeAndSigungucode (areaCode, sigunguCode, pageable);
+        else
+            return apiRepository.findByAreacodeAndSigungucodeAndTitleContaining (areaCode, sigunguCode, search, pageable);
     }
 }
 

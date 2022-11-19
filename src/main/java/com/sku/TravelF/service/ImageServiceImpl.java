@@ -1,7 +1,7 @@
 package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Image;
-import com.sku.TravelF.domain.repository.ImageRepository;
+import com.sku.TravelF.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

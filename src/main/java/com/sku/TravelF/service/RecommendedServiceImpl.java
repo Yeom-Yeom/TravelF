@@ -1,7 +1,7 @@
 package com.sku.TravelF.service;
 
 import com.sku.TravelF.domain.Recommended;
-import com.sku.TravelF.domain.repository.RecommendedRepository;
+import com.sku.TravelF.repository.RecommendedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -47,7 +47,7 @@ public class JournalController {
 
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);
-        mav.addObject("Search",Search);
+        mav.addObject("Search", Search);
         mav.addObject("Journal_message", Journal_message);
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.setViewName("journal/journal"); // 뷰의 이름
@@ -123,7 +123,7 @@ public class JournalController {
 
     @GetMapping({"form", "form/"})
     public ModelAndView form(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
-                             @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+            @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
         mav.addObject ("Journal", journalService.findJournalById (id));
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);

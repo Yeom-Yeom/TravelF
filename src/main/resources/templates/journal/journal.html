@@ -50,18 +50,15 @@
     </th:block>
 
     <div th:replace="layout/header::header"></div>
+
     <div class="container" >
         <div class="content-box">
             <div class="journal">
                 <div class="aside" style="position: sticky; top: 20px; height: 100%;">
-                    <form name="formSearch" class="formSearch" method="get" action="/journal/journal">
-                        <div class="search-by-user">
-                            <input type="hidden" id="JournalType" name="JournalType" th:value="${JournalType}"/>
-                            <input type="hidden" id="AreaCode" name="AreaCode" th:value="${AreaCode}"/>
-                            <input type="text" id="Search" name="Search"/>
-                            <button type="submit">검색하기</button>
-                        </div>
-                    </form>
+                    <div class="search-by-user" style="display:flex;">
+                        <input type="text"/>
+                        <button type="submit">검색하기</button>
+                    </div>
                     <h2>종류</h2>
                     <ul>
                         <a th:href="'/journal/journal?JournalType=0&AreaCode='+${AreaCode}"><li>모두의 일지</li></a>
@@ -120,26 +117,26 @@
                                 th:with="startNumber=(${T(java.lang.Math).floor(journalList.number/10)}*10+1), endNumber=((${journalList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${journalList.totalPages})">
                                 <th:block  th:if="${endNumber}">
                                     <li>
-                                        <a aria-label="Previous" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=1'"><span>&laquo;</span></a>
+                                        <a aria-label="Previous" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&Search=' +${Search} + '&page=1'"><span>&laquo;</span></a>
                                     </li>
                                     <li th:style="${journalList.first} ? 'display:none'">
-                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.number}"><span>&lsaquo;</span></a>
+                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&Search=' +${Search} + '&page=' + ${journalList.number}"><span>&lsaquo;</span></a>
                                     </li>
                                     <li class="active" th:each="page : ${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${journalList.number}+1) ? 'active': 'none'">
-                                        <a href="#" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${page}" th:text="${page}"><span class="sr-only"></span></a>
+                                        <a href="#" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&Search=' +${Search} + '&page=' + ${page}" th:text="${page}"><span class="sr-only"></span></a>
                                     </li>
                                     <li th:style="${journalList.last} ? 'display:none'">
-                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.number}+2"><span>&rsaquo;</span></a>
+                                        <a th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&Search=' +${Search} + '&page=' + ${journalList.number}+2"><span>&rsaquo;</span></a>
                                     </li>
                                     <li>
-                                        <a  aria-label="Next" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&page=' + ${journalList.totalPages}"><span>&raquo;</span></a>
+                                        <a  aria-label="Next" th:href="'/journal/journal?JournalType='+${JournalType} +'&AreaCode=' + ${AreaCode} + '&Search=' +${Search} + '&page=' + ${journalList.totalPages}"><span>&raquo;</span></a>
                                     </li>
                                 </th:block >
                             </ul>
                         </nav>
 
                         <div class="pull-right" th:if="${login_message} ne null">
-                            <a th:href="'/journal/form?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" class="btn-block">등록</a>
+                            <a th:href="'/journal/form?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode} + '&Search=' +${Search}" class="btn-block">등록</a>
                         </div>
                     </div>
 
