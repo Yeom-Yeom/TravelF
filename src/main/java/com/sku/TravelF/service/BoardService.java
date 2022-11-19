@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface BoardService {
-    public Page<Board> findBoardList(Pageable pageable);
-    public Page<Board> findBoardType(String boardType, Pageable pageable);
+    public Page<Board> findBoardList(String search, Pageable pageable);
+    public Page<Board> findBoardType(String boardType, String search, Pageable pageable);
     public List<Board> findTop5(String boardType);
     public Board findBoardById(Long id);
     public Board save(Board board);

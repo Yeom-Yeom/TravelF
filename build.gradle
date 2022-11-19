@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.sku'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -36,6 +36,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-parent:2.6.7'
 
 	//jython
+	implementation 'org.python:jython-standalone:2.7.3'
+	implementation 'tech.tablesaw:tablesaw-core:0.43.1'
+	implementation 'black.ninia:jep:4.0.3'
 
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'

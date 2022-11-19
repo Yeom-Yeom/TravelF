@@ -90,15 +90,12 @@ body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
     font-size : var(--font-medium);
     color : var(--white-color);
 }
-.header .member .member-menu li span{
-    font-size : var(--font-medium);
-}
 
 .header .cont .main-menu li{
     padding: 10px 8px;
 }
 
-.member-menu li a:hover {
+.member-menu li:hover {
     border-radius: 4px; background-color: var(--logo-color);
     margin:1px;
 }

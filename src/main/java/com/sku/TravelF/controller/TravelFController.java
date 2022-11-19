@@ -31,19 +31,21 @@ public class TravelFController {
     @GetMapping("region")
     public ModelAndView region(HttpSession session, ModelAndView mav) {
         mav.setViewName("travelf/region"); // 뷰의 이름
-        List<Region> region = new ArrayList<>();
-        mav.addObject("region", region);
+        //List<Region> region = new ArrayList<>();
+        //mav.addObject("region", region);
 
         mav.addObject("login_message", session.getAttribute ("name"));
         return mav;
     }
 
     @GetMapping({"attractions", "attractions/"})
-    public ModelAndView attractions(@RequestParam(value = "areaCode", defaultValue = "0") String areaCode, @RequestParam(value = "sigunguCode", defaultValue = "0") String sigunguCode, HttpSession session, ModelAndView mav) {
+    public ModelAndView attractions(@RequestParam(value = "areaCode", defaultValue = "0") String areaCode, @RequestParam(value = "sigunguCode", defaultValue = "0") String sigunguCode,
+                                    @RequestParam(value = "Search", defaultValue = "0") String search, @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav) {
         mav.setViewName("travelf/attractions"); // 뷰의 이름
-        List<Tour> result = apiService.CallApi (areaCode, sigunguCode);
-
-        mav.addObject("result",  result);
+        mav.addObject("areaCode", areaCode);
+        mav.addObject("sigunguCode", sigunguCode);
+        mav.addObject("Search", search);
+        mav.addObject("result",  apiService.findTour (areaCode, sigunguCode, search, pageable));
         mav.addObject("login_message", session.getAttribute ("name"));
         return mav;
     }
@@ -66,15 +68,17 @@ public class TravelFController {
     }
 
     @GetMapping({"board", "board/"})
-    public ModelAndView board(@RequestParam(value = "boardType", defaultValue = "0") String boardType, @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav){
+    public ModelAndView board(@RequestParam(value = "boardType", defaultValue = "0") String boardType, @RequestParam(value = "Search", defaultValue = "0") String search,
+                              @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav){
         if(boardType.equals ("0") || boardType.equals ("전체")){
-            mav.addObject ("boardList", boardService.findBoardList(pageable));
+            mav.addObject ("boardList", boardService.findBoardList(search, pageable));
         }
         else {
-            mav.addObject ("boardList", boardService.findBoardType (boardType, pageable));
+            mav.addObject ("boardList", boardService.findBoardType (boardType, search, pageable));
         }
         mav.setViewName("travelf/board"); // 뷰의 이름
         mav.addObject("boardType", boardType);
+        mav.addObject("Search", search);
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.addObject("board_message", board_message);
         board_message = "";

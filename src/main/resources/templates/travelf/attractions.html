@@ -65,6 +65,31 @@
                         </span>
                     </div>
                 </ul>
+                <div class="bottom-bar" >
+                    <!-- 페이지 번호 -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination"
+                            th:with="startNumber=(${T(java.lang.Math).floor(result.number/10)}*10+1), endNumber=((${result.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${result.totalPages})">
+                            <th:block  th:if="${endNumber}">
+                                <li>
+                                    <a aria-label="Previous" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=1'"><span>&laquo;</span></a>
+                                </li>
+                                <li th:style="${result.first} ? 'display:none'">
+                                    <a th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.number}"><span>&lsaquo;</span></a>
+                                </li>
+                                <li class="active" th:each="page : ${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${result.number}+1) ? 'active': 'none'">
+                                    <a href="#" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' +${page}" th:text="${page}"><span class="sr-only"></span></a>
+                                </li>
+                                <li th:style="${result.last} ? 'display:none'">
+                                    <a th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.number}+2"><span>&rsaquo;</span></a>
+                                </li>
+                                <li>
+                                    <a  aria-label="Next" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.totalPages}"><span>&raquo;</span></a>
+                                </li>
+                            </th:block >
+                        </ul>
+                    </nav>
+                </div>
 
             </div>
         </div>

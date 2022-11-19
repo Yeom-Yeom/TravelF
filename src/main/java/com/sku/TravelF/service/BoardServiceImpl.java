@@ -17,14 +17,18 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
 
-    // 페이징 처리된 게시글 리스트 반환
-    public Page<Board> findBoardList(Pageable pageable) {
+    // 페이징 처리된 게시글 전체 리스트 반환
+    public Page<Board> findBoardList(String search, Pageable pageable) {
         pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
-        return boardRepository.findAllByOrderByModifiedDateDesc (pageable);
+
+        if(search.equals ("0"))
+            return boardRepository.findAllByOrderByModifiedDateDesc (pageable);
+        else
+            return boardRepository.findAllByTitleContainingOrderByModifiedDateDesc (search, pageable);
     }
 
-    // 게시글 리스트 반환
-    public Page<Board> findBoardType(String boardType, Pageable pageable) {
+    // 게시글 타입 리스트 반환
+    public Page<Board> findBoardType(String boardType, String search, Pageable pageable) {
         BoardType Type;
         if(boardType.equals ("공지사항")){
             Type = BoardType.notice;
@@ -34,7 +38,11 @@ public class BoardServiceImpl implements BoardService {
             Type = null;
         }
         pageable = PageRequest.of(pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber ()-1, pageable.getPageSize ());
-        return boardRepository.findBoardByBoardTypeOrderByModifiedDateDesc (Type, pageable);
+
+        if(search.equals ("0"))
+            return boardRepository.findBoardByBoardTypeOrderByModifiedDateDesc (Type, pageable);
+        else
+            return boardRepository.findBoardByBoardTypeAndTitleContainingOrderByModifiedDateDesc (Type, search, pageable);
     }
 
     // 탑5 조회
