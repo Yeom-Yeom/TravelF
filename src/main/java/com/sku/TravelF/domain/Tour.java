@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Table
 public class Tour {
 

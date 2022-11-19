@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Table
 public class Board extends BaseTimeEntity {
 
