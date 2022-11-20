@@ -16,7 +16,8 @@
                 <ul class="member-menu" >
                     <li>
                         <th:block th:if="${login_message} eq null" >
-                            <a href="/user/login"><b>로그인</b></a>
+                            <a href="/user/login"><b>로그인</b></a><br>
+                            <a href="/user/Join"><b>회원가입</b></a>
                         </th:block>
                         <th:block th:if="${login_message} ne null" >
                             <a href="/user/logout">
@@ -39,13 +40,6 @@
             </div>
         </div>
     </div>
-
-    <div class="main">
-        <div class="content-box">
-
-        </div>
-    </div>
-
 </div>
 
 </html>
