@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
 public interface JournalService {
@@ -16,5 +17,6 @@ public interface JournalService {
     public List<Journal> findTop5();
     public Journal findJournalById(Long id);
     public void save(Journal journal, MultipartFile file) throws Exception;
+    public void update(Journal journal);
     public void deleteById(Long id);
 }

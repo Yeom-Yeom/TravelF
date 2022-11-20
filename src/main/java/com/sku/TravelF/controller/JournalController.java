@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 @Controller
@@ -56,7 +60,7 @@ public class JournalController {
     }
 
     @RequestMapping(value = "saveJournal", method = RequestMethod.POST)
-    public ModelAndView saveJournal(@ModelAttribute Journal journal, HttpSession session, ModelAndView mav, MultipartFile file) throws Exception {
+    public ModelAndView saveJournal(@RequestParam(value = "Search", defaultValue = "0") String Search, @ModelAttribute Journal journal, HttpSession session, ModelAndView mav, MultipartFile file) throws Exception {
         User user = memberService.findUser (session);
         if(user != null) {
             journal.setUser (user);
@@ -67,17 +71,17 @@ public class JournalController {
             Journal_message = "fail";
         }
         if(journal.getJournalType () == JournalType.everyone){
-            mav.setViewName("redirect:journal?JournalType=" + 0 + "&AreaCode=" + journal.getAreaCode ()); // 뷰의 이름
+            mav.setViewName("redirect:journal?JournalType=" + 0 + "&AreaCode=" + journal.getAreaCode () + "&Search=" + Search); // 뷰의 이름
         }
         else {
-            mav.setViewName("redirect:journal?JournalType=" + 1 + "&AreaCode=" + journal.getAreaCode ()); // 뷰의 이름
+            mav.setViewName("redirect:journal?JournalType=" + 1 + "&AreaCode=" + journal.getAreaCode () + "&Search=" + Search); // 뷰의 이름
         }
         return mav;
     }
 
     @RequestMapping(value = "updateJournal", method = RequestMethod.POST)
     public ModelAndView updateJournal(@RequestParam(value = "FJournalType", defaultValue = "0") String JournalType, @RequestParam(value = "FAreaCode", defaultValue = "0") String AreaCode,
-                                      @ModelAttribute Journal journal, HttpSession session, ModelAndView mav, MultipartFile file) throws Exception {
+                                      @RequestParam(value = "Search", defaultValue = "0") String Search, @ModelAttribute Journal journal, HttpSession session, ModelAndView mav, MultipartFile file) throws Exception {
         User user = memberService.findUser (session);
         Journal findJournal = journalService.findJournalById (journal.getId ());
 
@@ -85,7 +89,7 @@ public class JournalController {
             if(findJournal.getUser () == user) {
                 Journal persistJournal = journalService.findJournalById (journal.getId ());
                 persistJournal.update (journal);
-                journalService.save (persistJournal, file); // save = insert + update
+                journalService.update (persistJournal); // save = insert + update
                 Journal_message = "update";
             }
             else {
@@ -95,12 +99,13 @@ public class JournalController {
         else {
             Journal_message = "fail";
         }
-        mav.setViewName("redirect:journal?JournalType=" + JournalType + "&AreaCode=" + AreaCode); // 뷰의 이름
+        mav.setViewName("redirect:journal?JournalType=" + JournalType + "&AreaCode=" + journal.getAreaCode () + "&Search=" + Search); // 뷰의 이름
         return mav;
     }
 
     @RequestMapping(value = "deleteJournal", method = RequestMethod.POST)
-    public ModelAndView deleteJournal(@RequestParam(value = "FJournalType", defaultValue = "0") String JournalType, @RequestParam(value = "FAreaCode", defaultValue = "0") String AreaCode, @ModelAttribute Journal journal, HttpSession session, ModelAndView mav) {
+    public ModelAndView deleteJournal(@RequestParam(value = "FJournalType", defaultValue = "0") String JournalType, @RequestParam(value = "FAreaCode", defaultValue = "0") String AreaCode,
+                                      @RequestParam(value = "Search", defaultValue = "0") String Search, @ModelAttribute Journal journal, HttpSession session, ModelAndView mav) {
         User user = memberService.findUser (session);
         Journal findJournal = journalService.findJournalById (journal.getId ());
 
@@ -117,16 +122,17 @@ public class JournalController {
             Journal_message = "fail";
         }
 
-        mav.setViewName("redirect:journal?JournalType=" + JournalType + "&AreaCode=" + AreaCode); // 뷰의 이름
+        mav.setViewName("redirect:journal?JournalType=" + JournalType + "&AreaCode=" + journal.getAreaCode () + "&Search=" + Search); // 뷰의 이름
         return mav;
     }
 
     @GetMapping({"form", "form/"})
     public ModelAndView form(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
-            @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+                             @RequestParam(value = "Search", defaultValue = "0") String Search, @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
         mav.addObject ("Journal", journalService.findJournalById (id));
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);
+        mav.addObject("Search", Search);
         mav.addObject("Journal_message", Journal_message);
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.setViewName("journal/form"); // 뷰의 이름
@@ -134,7 +140,8 @@ public class JournalController {
     }
 
     @GetMapping({"read", "read/"})
-    public ModelAndView read(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode, @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+    public ModelAndView read(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
+                             @RequestParam(value = "Search", defaultValue = "0") String Search, @RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
         ArrayList<Comment> commentList = commentService.findJCommentList (id);
         ArrayList<Image> imageList = imageService.findImageList(id);
         mav.addObject ("Journal", journalService.findJournalById (id));
@@ -142,6 +149,7 @@ public class JournalController {
         mav.addObject ("imageList",   imageList);
         mav.addObject("JournalType", JournalType);
         mav.addObject("AreaCode", AreaCode);
+        mav.addObject("Search", Search);
         mav.addObject("userid", session.getAttribute ("userid"));
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.addObject("comment_message", comment_message);
@@ -151,7 +159,8 @@ public class JournalController {
     }
 
     @GetMapping({"modify", "modify/"})
-    public ModelAndView modify(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode, @RequestParam Long journalID, @RequestParam Long commentID, HttpSession session, ModelAndView mav) {
+    public ModelAndView modify(@RequestParam(value = "JournalType", defaultValue = "0") String JournalType, @RequestParam(value = "AreaCode", defaultValue = "0") String AreaCode,
+                               @RequestParam(value = "Search", defaultValue = "0") String Search, @RequestParam Long journalID, @RequestParam Long commentID, HttpSession session, ModelAndView mav) {
         Comment findComment = commentService.findCommentById (commentID);
 
         mav.addObject("journalID", journalID);
@@ -164,6 +173,7 @@ public class JournalController {
         mav.setViewName("journal/modify"); // 뷰의 이름
         return mav;
     }
+
 
     @RequestMapping(value = "saveComment", method = RequestMethod.POST)
     public ModelAndView saveComment(@RequestParam(value = "FJournalType", defaultValue = "0") String JournalType, @RequestParam(value = "FAreaCode", defaultValue = "0") String AreaCode, @ModelAttribute Comment comment, @RequestParam(value = "id2", defaultValue = "0") Long id, HttpSession session, ModelAndView mav) {

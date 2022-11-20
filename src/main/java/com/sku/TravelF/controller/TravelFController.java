@@ -1,6 +1,8 @@
 package com.sku.TravelF.controller;
 
 import com.sku.TravelF.domain.*;
+import com.sku.TravelF.domain.enums.BoardType;
+import com.sku.TravelF.domain.enums.JournalType;
 import com.sku.TravelF.service.ApiService;
 import com.sku.TravelF.service.BoardService;
 import com.sku.TravelF.service.CommentService;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +36,6 @@ public class TravelFController {
     @GetMapping("region")
     public ModelAndView region(HttpSession session, ModelAndView mav) {
         mav.setViewName("travelf/region"); // 뷰의 이름
-        //List<Region> region = new ArrayList<>();
-        //mav.addObject("region", region);
-
         mav.addObject("login_message", session.getAttribute ("name"));
         return mav;
     }
@@ -60,13 +62,6 @@ public class TravelFController {
         return mav;
     }
 
-    @GetMapping("find")
-    public ModelAndView find(HttpSession session, ModelAndView mav){
-        mav.setViewName("travelf/find"); // 뷰의 이름
-        mav.addObject("login_message", session.getAttribute ("name"));
-        return mav;
-    }
-
     @GetMapping({"board", "board/"})
     public ModelAndView board(@RequestParam(value = "boardType", defaultValue = "0") String boardType, @RequestParam(value = "Search", defaultValue = "0") String search,
                               @PageableDefault Pageable pageable, HttpSession session, ModelAndView mav){
@@ -86,7 +81,7 @@ public class TravelFController {
     }
 
     @RequestMapping(value = "saveBoard", method = RequestMethod.POST)
-    public ModelAndView saveBoard(@ModelAttribute Board board, HttpSession session, ModelAndView mav) {
+    public ModelAndView saveBoard(@RequestParam(value = "Search", defaultValue = "0") String search, @ModelAttribute Board board, HttpSession session, ModelAndView mav) {
         User user = memberService.findUser (session);
         if(user != null) {
             board.setUser (user);
@@ -96,12 +91,18 @@ public class TravelFController {
         else {
             board_message = "fail";
         }
-        mav.setViewName("redirect:board"); // 뷰의 이름
+
+        if(board.getBoardType () == BoardType.notice){
+            mav.setViewName("redirect:board?boardType="+ URLEncoder.encode ("공지사항", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
+        else {
+            mav.setViewName("redirect:board?boardType=" + URLEncoder.encode ("자유게시판", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
         return mav;
     }
 
     @RequestMapping(value = "updateBoard", method = RequestMethod.POST)
-    public ModelAndView updateBoard(@ModelAttribute Board board, HttpSession session, ModelAndView mav) {
+    public ModelAndView updateBoard(@RequestParam(value = "Search", defaultValue = "0") String search, @ModelAttribute Board board, HttpSession session, ModelAndView mav) {
         User user = memberService.findUser (session);
         Board findBoard = boardService.findBoardById (board.getId ());
 
@@ -119,7 +120,12 @@ public class TravelFController {
         else {
             board_message = "fail";
         }
-        mav.setViewName("redirect:board");
+        if(findBoard.getBoardType () == BoardType.notice){
+            mav.setViewName("redirect:board?boardType="+ URLEncoder.encode ("공지사항", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
+        else {
+            mav.setViewName("redirect:board?boardType=" + URLEncoder.encode ("자유게시판", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
         return mav;
     }
 
@@ -132,7 +138,7 @@ public class TravelFController {
     //@PathVariable = board/{id}/name/
     //@RequestParam = board+?id=&name=
     @RequestMapping(value = "deleteBoard", method = RequestMethod.POST)
-    public ModelAndView deleteBoard(@ModelAttribute Board board, HttpSession session, ModelAndView mav) {
+    public ModelAndView deleteBoard(@RequestParam(value = "Search", defaultValue = "0") String search, @ModelAttribute Board board, HttpSession session, ModelAndView mav) {
         User user = memberService.findUser (session);
         Board findBoard = boardService.findBoardById (board.getId ());
 
@@ -148,26 +154,35 @@ public class TravelFController {
         else {
             board_message = "fail";
         }
-        mav.setViewName("redirect:board");
+        if(findBoard.getBoardType () == BoardType.notice){
+            mav.setViewName("redirect:board?boardType="+ URLEncoder.encode ("공지사항", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
+        else {
+            mav.setViewName("redirect:board?boardType=" + URLEncoder.encode ("자유게시판", StandardCharsets.UTF_8) + "&Search=" + search); // 뷰의 이름
+        }
         return mav;
         //return new ResponseEntity<> ("{}", HttpStatus.OK);
     }
 
     @GetMapping({"form", "form/"})
-    public ModelAndView form(@RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+    public ModelAndView form(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "boardType", defaultValue = "0") String boardType, @RequestParam(value = "Search", defaultValue = "0") String search, HttpSession session, ModelAndView mav){
         mav.setViewName("travelf/form"); // 뷰의 이름
         mav.addObject ("board", boardService.findBoardById (id));
+        mav.addObject("boardType", boardType);
+        mav.addObject("Search", search);
         mav.addObject("login_message", session.getAttribute ("name"));
         return mav;
     }
 
     @GetMapping({"read", "read/"})
-    public ModelAndView read(@RequestParam(value = "id", defaultValue = "0") Long id, HttpSession session, ModelAndView mav){
+    public ModelAndView read(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "boardType", defaultValue = "0") String boardType, @RequestParam(value = "Search", defaultValue = "0") String search, HttpSession session, ModelAndView mav){
         mav.setViewName("travelf/read"); // 뷰의 이름
         ArrayList<Comment> commentList = new ArrayList<> ();
         commentList = commentService.findBCommentList (id);
         mav.addObject ("board", boardService.findBoardById (id));
         mav.addObject ("commentList", commentList);
+        mav.addObject("boardType", boardType);
+        mav.addObject("Search", search);
         mav.addObject("login_message", session.getAttribute ("name"));
         mav.addObject("userid", session.getAttribute ("userid"));
         mav.addObject("comment_message", comment_message);
