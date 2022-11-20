@@ -112,7 +112,7 @@
             <h1 class="page-header" >게시글 등록</h1>
         </div>
 
-        <form class="formJournal" name="formJournal" method="post" >
+        <form class="formJournal" name="formJournal" method="post" enctype="multipart/form-data" >
             <div class="formJournal-journal">
                 <div class="formJournal-journal_head">
                     <input id="id" name="id" type="hidden" th:value="${Journal?.id}" />
@@ -246,6 +246,7 @@
                     </div>
                 </div>
                 <BR>
+
                 <div th:if="${Journal?.getUploadPath()} eq null">
                     <img style="width: 1220px; height: 500px;" th:src="@{/image/Noimg.png}"/>
                 </div>

@@ -12,8 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -107,12 +110,10 @@ public class JournalServiceImpl implements JournalService{
 
     // 게시글 저장
     public void save(Journal journal, MultipartFile file) throws Exception{
+
         String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
-
         UUID uuid = UUID.randomUUID ();
-
         String fileName = uuid + "_" + file.getOriginalFilename ();
-
         File saveFile = new File (ProjectPath, fileName);
 
 
@@ -131,8 +132,22 @@ public class JournalServiceImpl implements JournalService{
         //return saved;
     }
 
+    // 게시글 수정
+    public void update(Journal journal) {
+        Journal updated = journalRepository.save (journal);
+    }
+
     // 게시글 삭제
     public void deleteById(Long id){
+        Optional<Journal> find = journalRepository.findById (id);
+        //파일 경로 지정
+        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
+        //현재 게시판에 존재하는 파일객체를 만듬
+        File savedFile = new File (ProjectPath, find.get ().getFileName ());
+
+        if(savedFile.exists()) { // 파일이 존재하면
+            savedFile.delete(); // 파일 삭제
+        }
         journalRepository.deleteById (id);
     }
 }

@@ -40,12 +40,14 @@ public class Journal extends BaseTimeEntity {
     private User user;
 
     @Builder
-    public Journal(Long id, String title, JournalType journalType, String areaCode, String content, User user){
+    public Journal(Long id, String title, JournalType journalType, String areaCode, String content, String fileName, String uploadPath, User user){
         this.id = id;
         this.title = title;
         this.journalType = journalType;
         this.areaCode = areaCode;
         this.content = content;
+        this.fileName = fileName;
+        this.uploadPath = uploadPath;
         this.user = user;
     }
 

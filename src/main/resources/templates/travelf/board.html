@@ -81,7 +81,7 @@
                             <tr th:each="board : ${boardList}" >
                                 <!--<td th:text="${board.id}"></td>-->
                                 <td th:text="${board.boardType.value}"></td>
-                                <td><a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a></td>
+                                <td><a th:href="'/travelf/read?boardType=' + ${boardType} + '&Search=' + ${Search} + '&id=' + ${board.id}" th:text="${board.title}" style="color: #337ab7"></a></td>
                                 <td th:text="${board.user.userid}"></td>
                                 <!--<td th:text="${board.createdDate}? ${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')}: ${board.createdDate}"></td>-->
                                 <td th:text="${board.modifiedDate}? ${#temporals.format(board.modifiedDate,'yyyy-MM-dd HH:mm')}: ${board.modifiedDate}"></td>
