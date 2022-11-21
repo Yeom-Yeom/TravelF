@@ -22,6 +22,8 @@
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/board.css}" />
     <link rel="stylesheet" th:href="@{/css/search.css}" />
+    <link rel="stylesheet" th:href="@{/css/sidebar.scss}" />
+
 </head>
 <body>
     <th:block th:if="${board_message} eq 'fail'" >
@@ -54,31 +56,31 @@
 
     <div class="container">
         <div class="content-box">
+            <div class="nav-wrap">
+                <nav class="main-nav" role="navigation">
+                    <ul class="unstyled list-hover-slide">
+                        <li><a th:href="'/travelf/board?boardType=전체'">전체</a></li>
+                        <li><a th:href="'/travelf/board?boardType=공지사항'">공지사항</a></li>
+                        <li><a th:href="'/travelf/board?boardType=자유게시판'">자유게시판</a></li>
+                    </ul>
+                </nav>
+            </div>
             <h1 class="hidden">게시글 목록</h1>
             <div class="board" >
-                <div class="aside">
-                    <h2>종류</h2>
-                    <ul>
-                        <a th:href="'/travelf/board?boardType=전체'"><li>전체</li></a>
-                        <a th:href="'/travelf/board?boardType=공지사항'"><li>공지사항</li></a>
-                        <a th:href="'/travelf/board?boardType=자유게시판'"><li>자유게시판</li></a>
-                    </ul>
-                </div>
-
-                <div class="board-main" >
-                    <div class="mainHide" >
-                        <table class="table" >
-                            <thead class="table_head">
+                <div class="board-list" >
+                    <div class="container" >
+                        <table class="board-table" >
+                            <thead>
                             <tr>
                                 <!--<th class="col-md-1">#</th>-->
-                                <th class="col-md-1">분류</th>
-                                <th class="col-md-2">제목</th>
-                                <th class="col-md-3">작성자</th>
-                                <th class="col-md-4">작성 날짜</th>
+                                <th scope="col" class="th-num">분류</th>
+                                <th scope="col" class="th-title">제목</th>
+                                <th scope="col" class="th-title">작성자</th>
+                                <th scope="col" class="th-date">작성 날짜</th>
                                 <!--<th class="col-md-5">수정 날짜 readform?id='+${board.id}</th>-->
                             </tr>
                             </thead>
-                            <tbody class="table_body">
+                            <tbody>
                             <tr th:each="board : ${boardList}" >
                                 <!--<td th:text="${board.id}"></td>-->
                                 <td th:text="${board.boardType.value}"></td>
@@ -90,7 +92,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <div class="bottom-bar" >
                         <!-- 페이지 번호 -->
                         <nav aria-label="Page navigation">
@@ -117,19 +118,20 @@
                         </nav>
 
                         <div class="pull-right" th:if="${login_message} ne null">
-                            <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a><br>
+                            <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a>
                         </div>
                     </div>
-                    <form class="search" th:action="'/travelf/board?boardType='+${boardType}+'&Search='+${Search}" method="get">
-                        <div class="search">
-                            <input type="hidden" class="boardType" name="boardType" th:value="${boardType}"/>
-                            <input type="text" class="Search" name="Search" placeholder="검색하기"/>
-                            <button type="submit" hidden="hidden">검색</button>
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"/>
-                        </div>
-                    </form>
                 </div>
             </div>
+            <form class="search" th:action="'/travelf/board?boardType='+${boardType}+'&Search='+${Search}" method="get">
+                <div class="search">
+                    <input type="hidden" class="boardType" name="boardType" th:value="${boardType}"/>
+                    <input type="text" class="Search" name="Search" placeholder="검색하기"/>
+                    <button type="submit" hidden="hidden">검색</button>
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"/>
+                </div>
+            </form>
+
         </div>
     </div>
 </body>

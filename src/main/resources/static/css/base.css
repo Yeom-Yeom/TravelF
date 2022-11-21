@@ -53,6 +53,7 @@ body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
 /* header */ /* 468 926 */
 .header {
     justify-content: center;
+    background-position: center;
     min-width: 1280px;
     height:250px;
     background-color: var(--background-color);

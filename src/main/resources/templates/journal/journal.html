@@ -93,14 +93,14 @@
                         <div class="photo" style="background-color: #ffffff; border: 1px solid black; display: flex; flex-direction: column; align-items: center; align-content: center; width: 188px; box-shadow: 1px 1px 1px black;" >
                             <a th:href="'/journal/read?id=' + ${pho.getId()} + '&JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode}" >
                                 <div th:if="${pho.getUploadPath()} eq null">
-                                    <img style="width: 178px; height: 150px; border: 1px solid black; margin: 5px;" th:src="@{/image/Noimg.png}" alt="이미지 없음">
+                                    <img style="width: 120px; height: 150px; border: 1px solid black; margin: 5px;" th:src="@{/image/Noimg.png}" alt="이미지 없음">
                                 </div>
                                 <div th:unless="${pho.getUploadPath()} eq null">
-                                    <img style="width: 178px; height: 150px; border: 1px solid black; margin: 5px;" th:src="${pho.getUploadPath()}" alt="이미지 없음">
+                                    <img style="width: 120px; height: 150px; border: 1px solid black; margin: 5px;" th:src="${pho.getUploadPath()}" alt="이미지 없음">
                                 </div>
                                 <div class="photo_info" style="width: 178px; background-color: #ffffff; margin: 5px;">
-                                    <p style="border: none; width: 178px;" th:text="${pho.title}"></p>
-                                    <p style="border: none; width: 178px;" th:text="${pho.getModifiedDate()}"></p>
+                                    <p style="border: none; width: 120px;" th:text="${pho.title}"></p>
+                                    <p style="border: none; width: 120px;" th:text="${pho.getModifiedDate()}"></p>
                                 </div>
                             </a>
                         </div>
