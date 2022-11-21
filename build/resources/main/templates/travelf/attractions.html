@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/attractions.css}" />
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function Date()
+        {
+            let date = document.getElementById('date').value;
+
+            if("" == date){
+                alert("날짜를 입력하세요");
+                document.getElementById('date').focus();
+                return;
+            }
+            document.formStatistics.action= "date"
+            document.formStatistics.submit();
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="content-box">
+            <div class="attr-box" >
+<!--                <form class="formAttr" name ="formAttr" method="post">
+                    <label>
+                        날짜를 입력해주세요
+                        <input type="date" id="date" name="date" class="date" />
+                        <button type="button" class="btn btn-date" id="btn_Date" onclick=Date() >입력</button>
+                    </label>
+                </form>-->
+
+                <ul data-role="listview" data-inset="true">
+                    <div class="attr" th:if="${result} ne null" >
+                        <span th:each="Tour : ${result}">
+                            <li >
+                                <a th:href="'/travelf/view?contentId='+ ${Tour.getContentid()}" >
+                                    <div class="info" style="height: 150px;">
+                                        <span th:if="${Tour.getFirstimage()}  ne '없음'">
+                                            <img style="width: 200px; height: 150px;" th:src="${Tour.getFirstimage()}"><br>
+                                        </span>
+                                        <span th:unless="${Tour.getFirstimage()}  ne '없음'">
+                                            <img style="width: 200px; height: 150px;" th:src="@{/image/Noimg.png}" alt="이미지 없음"><br>
+                                        </span>
+
+                                        <div class="title">
+                                            <span th:text="${Tour.getTitle()}"></span>
+                                            <span  th:if="${Tour.getAddr1()}  ne '없음'" th:text="${Tour.getAddr1()}"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </span>
+                    </div>
+                </ul>
+                <div class="bottom-bar" >
+                    <!-- 페이지 번호 -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination"
+                            th:with="startNumber=(${T(java.lang.Math).floor(result.number/10)}*10+1), endNumber=((${result.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${result.totalPages})">
+                            <th:block  th:if="${endNumber}">
+                                <li>
+                                    <a aria-label="Previous" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=1'"><span>&laquo;</span></a>
+                                </li>
+                                <li th:style="${result.first} ? 'display:none'">
+                                    <a th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.number}"><span>&lsaquo;</span></a>
+                                </li>
+                                <li class="active" th:each="page : ${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${result.number}+1) ? 'active': 'none'">
+                                    <a href="#" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' +${page}" th:text="${page}"><span class="sr-only"></span></a>
+                                </li>
+                                <li th:style="${result.last} ? 'display:none'">
+                                    <a th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.number}+2"><span>&rsaquo;</span></a>
+                                </li>
+                                <li>
+                                    <a  aria-label="Next" th:href="'/travelf/attractions?areaCode=' + ${areaCode} +'&sigunguCode=' + ${sigunguCode} + '&Search=' +${Search} + '&page=' + ${result.totalPages}"><span>&raquo;</span></a>
+                                </li>
+                            </th:block >
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

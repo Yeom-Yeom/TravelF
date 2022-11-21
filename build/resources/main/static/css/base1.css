@@ -1,0 +1,190 @@
+@import url(reset.css);
+
+:root {
+    --text-color: #140a00;
+    --background-color: #fff;
+    --logo-color: #32B800;
+    --pull-color: rgb(100, 201, 100);
+
+    /* color */
+    --white-color: #fff;
+    --black-color: #140a00;
+    --blue-color: #045fd4;
+    --red-color: #ff0000;
+    --gray-dark-color: #909090;
+    --gray-light-color: #e0e0e0;
+
+    /* size */
+    --side-padding: 12px;
+    --avatar-size: 36px;
+
+    /* font size*/
+    --font-large: 24px;
+    --font-medium: 20px;
+    --font-small: 14px;
+    --font-micro: 12px;
+}
+
+html{ position: relative; min-height: 100%; }
+a:hover { text-decoration: none; /* 링크의 밑줄 제거 */ }
+body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
+.hidden{ display: none !important;}
+.content-box
+{
+    height: inherit;
+    /*height: 100%;*/
+    width: 1220px;
+    margin-left:auto;
+    margin-right:auto;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+.main-container .main-content-box{
+    min-height:100%;
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    padding-bottom:60px;
+}
+/* header */ /* 468 926 */
+.header {
+    justify-content: center;
+    min-width: 1280px;
+    height:250px;
+    background-color: var(--background-color);
+    background-image : url("../image/main.png");
+    background-repeat : no-repeat;
+    background-size: cover;
+    box-shadow: 2px 2px 2px var(--gray-dark-color);
+}
+.header .member {
+    display: flex;
+    padding: 20px 30px;
+    width: 1220px;
+    justify-content: space-between; color: var(--white-color);
+}
+
+.header .cont {
+    display: flex;
+    padding: 100px 20px 30px;
+    width: 1220px;
+    justify-content: space-between; color: var(--white-color);
+}
+
+
+.header .member .member-logo {
+    display: flex; align-items: center;
+    font-size: var(--font-large); }
+
+.header .member .member-logo i{
+    color: #FFAA01;
+    padding: 15px 5px 15px 0; }
+
+.header .member .member-logo a{
+    padding: 15px 0 15px 5px; }
+
+.header .member .member-menu {
+    display: flex; align-items: center; }
+
+.header .member .member-menu li{
+    padding: 8px 16px;
+    font-size: var(--font-small);
+    display:none;
+}
+
+.header .member .member-menu li a{
+    font-size : var(--font-medium);
+    color : var(--white-color);
+}
+
+.header .cont .main-menu li{
+    padding: 10px 8px;
+}
+
+.member-menu li a:hover {
+    border-radius: 4px; background-color: var(--logo-color);
+    margin:1px;
+}
+
+.main-menu li:hover{
+    border-radius: 4px; background-color: var(--logo-color);
+    margin:1px;
+}
+
+/* main */
+.main { justify-content: center; min-width: 1280px;}
+.header .cont { display: flex; padding: 102px 20px 30px; }
+.header .cont .main-menu {
+    display: flex;
+    width: 1220px;
+    justify-content: space-between; }
+.header .cont .main-menu li {  font-size: var(--font-medium); }
+
+/* footer */
+.footer{
+    position: relative;
+    transform:translateY(100%);
+    box-sizing: border-box;
+    min-width: 1280px;
+    bottom: 0;
+    width: 100%;
+    background-color: #5F5F5F;
+    color: #c0c0c0;}
+
+.footer_info {
+    display: flex;
+    width: 1220px;
+    padding: 10px 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 모바일 */
+@media screen and (max-width: 768px) {
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+
+    .navbar-main {
+        width: 200px;
+    }
+
+    .main-menu{
+        display: none;
+        flex-direction: column;
+    }
+
+    .main-menu li{
+        text-align: center;
+    }
+
+    .navbar-sub {
+        width: 200px;
+    }
+
+    .sub-menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .sub-menu li{
+        width: 100%;
+        text-align: center;
+        padding: 8px 16px;
+    }
+
+    .navbar-tooglebtn {
+        display: inline;
+    }
+
+    .main-menu.active,
+    .sub-menu.active {
+        display: flex;
+    }
+}

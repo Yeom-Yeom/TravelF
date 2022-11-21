@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+
+    <!-- 페이징 -->
+    <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/read_T.css}" />
+    <script type="text/javascript">
+        function UpdateBoard()
+        {
+            const id = document.getElementById('id').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const boardType = document.getElementById('boardType').value;
+
+            if("" == title){
+                alert("제목을 입력하세요");
+                document.getElementById('title').focus(); //입력포커스 이동
+                return; //함수 종료
+            }
+            if("" == content){
+                alert("내용을 입력하세요");
+                document.getElementById('content').focus();
+                return;
+            }
+            if("분류" == boardType){
+                alert("게시판 분류을 입력하세요");
+                document.getElementById('boardType').focus();
+                return;
+            }
+            document.formBoard.action= "updateBoard"
+            document.formBoard.submit();
+        }
+        function DeleteBoard()
+        {
+            const id = document.getElementById('id').value;
+            const boardType = document.getElementById('boardType').value;
+            if("분류" == boardType){
+                alert("게시판 분류을 입력하세요");
+                document.getElementById('boardType').focus();
+                return;
+            }
+            document.formBoard.action= "deleteBoard"
+            document.formBoard.submit();
+        }
+        function InsertComment()
+        {
+            const id2 = document.getElementById('id2').value;
+            const reply = document.getElementById('reply').value;
+
+            if("" == reply){
+                alert("내용을 입력하세요");
+                document.getElementById('reply').focus();
+                return;
+            }
+            document.formInsertComment.action= "saveComment";
+            document.formInsertComment.submit();
+        }
+        function UpdateComment()
+        {
+            const id3 = document.getElementById('id3').value;
+            const reply = document.getElementById('review').value;
+
+            if("" == reply){
+                alert("내용을 입력하세요");
+                document.getElementById('review').focus();
+                return;
+            }
+            document.href="'/travelf/updateComment?boardID='+${board?.id}+'&commentID='+${comment.id}+'&reply='+${reply}";
+            document.$(this).attr("data-comment").submit();
+        }
+    </script>
+    <script th:src="@{/js/textarea.js}" type="text/javascript" defer></script>
+</head>
+<body>
+    <th:block th:if="${comment_message} eq 'fail'" >
+        <script>
+            alert('댓글 등록이 실패하였습니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${comment_message} eq 'save'" >
+        <script>
+            alert('댓글이 등록되었습니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${comment_message} eq 'update'" >
+        <script>
+            alert('댓글이 수정되었습니다.');
+        </script>
+    </th:block>
+    <th:block th:if="${comment_message} eq 'delete'" >
+        <script>
+            alert('댓글이 삭제되었습니다.');
+        </script>
+    </th:block>
+
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="content-box">
+            <div class="hidden" >
+                <h1 class="page-header" >게시글 등록</h1>
+            </div>
+
+            <form class="formBoard" name="formBoard" method="post" >
+                <div class="formBoard-board">
+                    <div class="formBoard-board_head">
+                        <input id="id" name="id" type="hidden" th:value="${board?.id}" />
+                        <input id="create_date" name="create_date" type="hidden" th:value="${board?.createdDate}" />
+
+                            <div th:if="${board?.user?.userid} eq ${userid}">
+                                <select class="form-control input-sm" id="boardType" name="boardType" style="border: none;">
+                                    <option th:selected="${board?.boardType?.name() == ''}" >분류</option>
+                                    <option th:value="notice" th:selected="${board?.boardType?.name() == 'notice'}">공지사항</option>
+                                    <option th:value="free" th:selected="${board?.boardType?.name() == 'free'}">자유게시판</option>
+                                </select>
+                            </div>
+                            <div th:unless="${board?.user?.userid} eq ${userid}">
+                                <input class="form-control input-sm" name="boardType" disabled="disabled" th:if="${board?.boardType?.name()} eq 'notice'"
+                                       th:value="공지사항" style="border: none;"/>
+                                <input class="form-control input-sm" name="boardType" disabled="disabled" th:unless="${board?.boardType?.name()} eq 'notice'"
+                                       th:value="자유게시판" style="border: none;"/>
+                            </div>
+
+                            <input type="next" class="col-md-1 form-control input-sm" disabled="disabled" style="border: none;"
+                                   th:if="${board?.id}" th:value="${board?.modifiedDate} ? ${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')} : ${board?.modifiedDate}" />
+
+                            <div th:if="${board?.user?.userid} eq ${userid}">
+                                <input id="title" name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" required
+                                       class="col-md-1 form-control input-sm" th:value="${board?.title}" style="width: 1200px; border: none;" />
+                            </div>
+                            <div th:unless="${board?.user?.userid} eq ${userid}">
+                                <input  name="title" type="next" rows="1" cols="55" placeholder="제목" maxlength="100" disabled="disabled" required
+                                       class="col-md-1 form-control input-sm" th:value="${board?.title}" style="width: 1200px; border: none;" />
+                            </div>
+                    </div>
+                        <BR>
+                    <div class="formBoard-board_main">
+                        <div th:if="${board?.user?.userid} eq ${userid}">
+                            <textarea id="content" name="content" class="col-md-1 form-control input-sm" maxlength="255"
+                                      placeholder="내용" th:text="${board?.content}" style="width: 1200px; border: none;" required></textarea>
+                        </div>
+                        <div th:unless="${board?.user?.userid} eq ${userid}">
+                            <textarea name="content" class="col-md-1 form-control input-sm" maxlength="255" disabled="disabled"
+                                      placeholder="내용" th:text="${board?.content}" style="width: 1200px; border: none;" required></textarea>
+                        </div>
+                    </div>
+                        <BR>
+                </div>
+
+                <div class="formBoard-pull">
+
+                    <a th:href="'/travelf/board?boardType=' + ${boardType} + '&Search=' + ${Search}"  >목록으로</a>
+
+
+                    <div class="pull-right">
+                        <div th:if="${board.user.userid} eq ${userid}">
+                            <!--<input type="hidden" name="_method" value="put" >-->
+                            <button th:if="${board?.id}" type="button" id="btn_update" onclick=UpdateBoard() >수정</button>
+                            <!--<input type="hidden" name="_method" value="delete" >-->
+                            <button th:if="${board?.id}" type="button" id="btn_delete" onclick=DeleteBoard() >삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <HR/>
+            <!-- 댓글 -->
+            <div class="comment-box">
+                <form class="formInsertComment" name="formInsertComment" encType = "multipart/form-data" method="post">
+                    <input id="id2" name="id2" type="hidden" th:value="${board?.id}" />
+                    <!-- 입력 -->
+                    <div class="comment" th:if="${userid}">
+                        <div class="comment_head">
+                            작성자: <span id="replyUser" name="replyUser" th:text="${userid}" ></span>
+                        </div>
+                        <textarea id="reply" name="reply" class="col-md-1 form-control input-sm" maxlength="255"
+                                       placeholder="댓글" required></textarea>
+                        <button type="button" class="right btn btn-info" id="replyRegist" style="border: none;" onclick=InsertComment() >등록하기</button>
+                    </div>
+                </form>
+
+                <!-- 후기 -->
+                    <div class="review" th:each="comment : ${commentList}">
+                        <div class="review_info" >
+                                    <input id="comment_id" name="id" type="hidden" th:value="${comment?.id}" /> <!-- (5) 6 7-->
+                                    <input id="id3" name="id3" type="hidden" th:value="${board?.id}" />
+
+                                    <div class="review_info_head">
+                                        작성자: <span th:text="${comment?.user.userid}" style="margin-right: 10px;" autofocus></span>
+                                        작성일: <span th:text="${comment?.modifiedDate}? ${#temporals.format(comment?.modifiedDate,'yyyy-MM-dd HH:mm')}: ${comment?.modifiedDate}" ></span>
+                                        <div class="review_info_pro" th:if="${userid} eq ${comment?.user.userid}">
+                                            <!--<button type="button" id="btn_UpdateComment" onclick=UpdateComment() >수정</button>
+                                            |
+                                            <button type="button" id="btn_DeleteComment" onclick=DeleteComment() >삭제</button>-->
+                                            <!--<a onclick=UpdateComment() th:data="${comment.id}">수정</a>-->
+                                            <a onclick="return confirm('정말로 수정하시겠습니까?')" th:href="'/travelf/modify?boardID='+${board?.id}+'&commentID='+${comment?.id}" >
+                                                <span><i class="fa fa-pen"></i>수정</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="review_info_main">
+                                        <textarea  name="reply" maxlength="255" onfocus="resize(this)" readonly="readonly" style="border: none; background-color: #f2f2f2;" th:text="${comment.reply}" ></textarea>
+                                    </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

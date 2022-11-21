@@ -1,0 +1,20 @@
+/* body */
+.container { justify-content: center; min-width: 1280px; height: 95vh; }
+.content-box { display:flex; justify-content: center; }
+.formComment { display: flex; flex-direction: column; width: 1220px; padding: 40px 30px; }
+
+.review_info { background-color: #f2f2f2; border-radius: 4px; padding: 10px; }
+.review_info_head { margin-bottom: 10px; }
+.review_info_pro { position: relative; height: 30px;}
+.review_info_pro_btn { position: absolute; right: 0; }
+
+.review_info_pro button { border: none; width: 80px; height: 25px;
+    align-items: center; justify-content:center;
+    color: #f0f4f5; border-radius: 4px; background-color: springgreen; font-size: 16px;}
+
+.review_info_pro a { border: none; width: 80px; height: 25px;
+    align-items: center; justify-content:center;
+    font-size: var(--font-small);
+    color: #f0f4f5; border-radius: 4px; background-color: #d24945; padding: 1px 6px; }
+
+.review_info_main textarea { width: 746px; min-height: 4rem; resize: none;  outline: none; }

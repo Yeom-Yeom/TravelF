@@ -1,0 +1,64 @@
+/* body */
+.container { justify-content: center; min-width: 1280px; }
+
+.formBoard {display: flex; flex-direction:column; justify-content: center; width: 1220px; padding: 40px 30px; }
+.formBoard .formBoard-board { display: flex; flex-direction:column; }
+.formBoard .formBoard-board textarea{ height: 400px; resize: none; }
+.formBoard-board_head { padding: 10px; border-radius: 4px; background-color: #f2f2f2;}
+.formBoard-board_main { padding: 10px; border-radius: 4px; background-color: #f2f2f2;}
+
+.formBoard-pull {display: flex; justify-content: space-between;}
+.formBoard-pull a,
+.formBoard-pull a:focus,
+.formBoard-pull a:hover,
+.formBoard-pull span,
+.formBoard-pull span:focus,
+.formBoard-pull span:hover {
+    z-index: 3;
+    cursor: default;
+}
+.formBoard-pull a{
+    display: flex;
+    align-items: center; justify-content:center;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    padding: 1px 6px;
+    border-radius: 4px;
+    height: 36.85px;
+    color: #f0f4f5; font-size: var(--font-small);
+}
+.formBoard-pull a:hover { background-color: #265a88;}
+.formBoard-pull button{
+    width: 50px; height: 36.85px;
+    align-items: center; justify-content:center;
+    font-size: var(--font-small);
+    color: #f0f4f5; border-radius: 4px; }
+
+.comment-box { width: 1220px; padding: 0 30px 40px 30px; }
+.comment { display: flex; position: relative; border: 2px solid #ffffff; height: 200px; padding: 20px; background-color: #f2f2f2; border-radius: 4px;}
+.comment textarea{ position: absolute; width: 1150px; overflow-y: hidden; height: 98px; resize: none; padding: 10px; top: 50px; right: 20px;}
+.comment button{ position: absolute; width: 80px; color: #f0f4f5; border-radius:4px; padding: 10px; top: 180px; right: 20px; background-color: #3174ae;}
+
+.review { border: 2px solid #ffffff; min-height: 110px; }
+.review_info { display: flex; flex-direction: column; background-color: #f2f2f2; border-radius: 4px; padding: 20px; }
+.review_info_head { display: flex; position: relative; margin-bottom: 10px; }
+.review_info_pro { position: absolute; right: 0;}
+.review_info_pro a { font-size: var(--font-micro); }
+.review_info_main textarea { width: 725px; height:50px; min-height: 4rem; resize: none;  outline: none; overflow-y: hidden; }
+
+#btn_update { float: left; box-shadow: 3px 3px 3px #666;
+    transition-duration: 0.3s; border: 1px solid springgreen;
+    border-radius: 4px; background-color: springgreen;
+    font-size: 16px; }
+#btn_delete { float: left; box-shadow: 3px 3px 3px #666;
+    transition-duration: 0.3s; border: 1px solid #d24945;
+    border-radius: 4px; background-color: #d24945; font-size: 16px; margin-left: 10px;}
+button:active {
+    box-shadow: none;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.pull-right button:hover { background-color: #265a88;}
+
+
+

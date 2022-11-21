@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <title>TravelF</title>
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+  <!-- 아이콘 -->
+  <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/css/tourlist.css}" />
+  <script th:src="@{/js/travelf.js}" type="text/javascript" defer></script>
+</head>
+<body>
+<!-- ---------------------------<header>--------------------------------------- -->
+  <div th:replace="layout/header::header"></div>
+
+  <div class="visual">
+    <div class="content-box">
+<!--      <div class="button-list">
+        <button type="button" class="button-left"></button>
+        <button type="button" class="button-right"></button>
+        &lt;!&ndash;      <button type="button" class="button-left">← Left</button><img src="이미지경로">
+              <button type="button" class="button-right">Right →</button>&ndash;&gt;
+      </div>-->
+      <div style="padding: 40px 30px 0 30px;">
+        <div class="outer" >
+          <div class="inner-list">
+            <div class="inner">
+              <a href="/travelf/region"><img th:src="@{/image/forest.png}" alt="이미지 없음"></a>
+            </div>
+            <div class="inner">
+              <a href="/travelf/region"><img th:src="@{/image/sea.png}" alt="이미지 없음"></a>
+            </div>
+            <div class="inner">
+              <a href="/travelf/region"><img th:src="@{/image/palace.png}" alt="이미지 없음"></a>
+            </div>
+          </div>
+          <button type="button" class="button-left"></button>
+          <button type="button" class="button-right"></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container" >
+    <div class="content-box">
+
+      <div style="display: flex; padding: 0 30px;">
+
+        <div style="margin: 5px 10px 5px 0; ">
+          <div style="width: 590px; margin: 10px 5px;">
+            <div style="display: flex; justify-content: space-between; background-color: #f1f1f1; border-radius: 4px;">
+              <h2>최신 여행일지</h2>
+              <a th:href="'/journal/journal'">more</a>
+            </div>
+              <div th:each="journal:${result}" >
+              <a th:if="${journal.getJournalType().name()} eq 'alone'" th:href="'/journal/read?id='+${journal.id} + '&JournalType=1&AreaCode=' + ${journal.getAreaCode()}" >
+                <div th:if="${journal.getUploadPath()} eq null" style="display:flex; padding: 5px;">
+                  <img style="width: 200px; height: 100px;" th:src="@{/image/Noimg.png}" >
+                  <div style="padding: 5px;">
+                    <p th:text="${journal.title}" style="color: #337ab7"></p>
+                    <p th:text="${journal.getModifiedDate()}" style="color: #337ab7"></p>
+                  </div>
+                </div>
+                <div th:unless="${journal.getUploadPath()} eq null" style="display:flex; padding: 5px;">
+                  <img style="width: 200px; height: 100px;" th:src="${journal.getUploadPath()}" >
+                  <div style="padding: 5px;">
+                    <p th:text="${journal.title}" style="color: #337ab7"></p>
+                    <p th:text="${journal.getModifiedDate()}" style="color: #337ab7"></p>
+                  </div>
+                </div>
+              </a>
+              <a th:if="${journal.getJournalType().name()} eq 'everyone'" th:href="'/journal/read?id='+${journal.id} + '&JournalType=0&AreaCode=' + ${journal.getAreaCode()}" >
+                <div th:if="${journal.getUploadPath()} eq null" style="display:flex; padding: 5px;">
+                  <img style="width: 200px; height: 100px;" th:src="@{/image/Noimg.png}" >
+                  <div style="padding: 5px;">
+                    <p th:text="${journal.title}" style="color: #337ab7"></p>
+                    <p th:text="${journal.getModifiedDate()}" style="color: #337ab7"></p>
+                  </div>
+                </div>
+                <div th:unless="${journal.getUploadPath()} eq null" style="display:flex; padding: 5px;">
+                  <img style="width: 200px; height: 100px;" th:src="${journal.getUploadPath()}" >
+                  <div style="padding: 5px;">
+                    <p th:text="${journal.title}" style="color: #337ab7"></p>
+                    <p th:text="${journal.getModifiedDate()}" style="color: #337ab7"></p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            </div>
+        </div>
+
+        <div style="margin: 5px 0 5px 10px; ">
+          <div style="width: 590px; margin: 10px 5px;">
+
+              <div style="display: flex; justify-content: space-between; background-color: #f1f1f1; border-radius: 4px;">
+                <h2>공지사항</h2>
+                <a th:href="'/travelf/board?boardType=공지사항'">more</a>
+              </div>
+              <div th:each="board:${result1}" style="padding: 10px 5px;">
+                <a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
+              </div>
+            </div>
+
+          <div style="width: 590px; margin: 40px 5px 10px 5px;">
+
+              <div style="display: flex; justify-content: space-between; background-color: #f1f1f1; border-radius: 4px;">
+                <h2>자유게시판</h2>
+                <a th:href="'/travelf/board?boardType=자유게시판'">more</a>
+              </div>
+              <div th:each="board:${result2}" style="padding: 10px 5px;">
+                <a th:href="'/travelf/read?id='+${board.id}" th:text="${board.title}" style="color: #337ab7"></a>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

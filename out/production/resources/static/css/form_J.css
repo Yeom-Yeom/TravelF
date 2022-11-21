@@ -1,0 +1,38 @@
+
+/* body */
+.container { justify-content: center; min-width: 1280px; }
+
+.formJournal {display: flex; flex-direction:column; justify-content: center; width: 1220px; padding: 40px 30px; }
+.formJournal .formJournal-journal { display: flex; flex-direction:column; }
+.formJournal .formJournal-journal textarea{ height: 400px; resize: none; padding: 10px; }
+
+.formJournal-pull {display: flex; justify-content: space-between;}
+.formJournal-pull a,
+.formJournal-pull a:focus,
+.formJournal-pull a:hover,
+.formJournal-pull span,
+.formJournal-pull span:focus,
+.formJournal-pull span:hover {
+    z-index: 3;
+    cursor: default;
+}
+.formJournal-pull a{
+    display: flex;
+    align-items: center; justify-content:center;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    padding: 1px 6px;
+    border-radius: 4px;
+    height: 36.85px;
+    color: #f0f4f5; font-size: var(--font-small);
+}
+.formJournal-pull a:hover { background-color: #265a88;}
+.formJournal-pull button{
+    width: 50px; height: 36.85px;
+    align-items: center; justify-content:center;
+    font-size: var(--font-small);
+    color: #f0f4f5; border-radius: 4px;
+    background-color: #337ab7;
+    border-color: #337ab7;}
+
+.pull-right button:hover { background-color: #265a88;}

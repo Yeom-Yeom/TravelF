@@ -1,0 +1,9 @@
+.container { justify-content: center; min-width: 1280px; }
+
+.rec_img { width: 1220px; padding: 40px 30px;}
+.rec_img h1 { font-size: var(--font-large); }
+.rec_img .region_info { background-color: #f1f1f1; border-radius: 4px; padding: 10px; margin: 0 0 10px 0;}
+.rec_img .region_info .region_main { display: flex; flex-direction: column; border-radius: 4px; }
+.rec_img .region_info .region_main section { display:flex; padding: 10px;}
+.rec_img .region_info .region_main section div{ display:flex; justify-content: center; align-items: center; width: 118px; }
+.rec_img .region_info .region_main a { border: 1px solid #f6f6f6; background-color: #f5f5f5; border-radius: 4px; padding: 5px; }

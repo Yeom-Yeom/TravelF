@@ -1,0 +1,45 @@
+.visual { justify-content: center; min-width: 1280px; background-color: var(--white-color)}
+.container { justify-content: center; min-width: 1280px;background-color: var(--white-color) }
+
+.visual .content-box {
+    position: relative;
+}
+.container .content-box {
+    height : 402px;
+}
+.outer {
+    width: 1220px;
+    height: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.inner-list {
+    display: flex;
+    transition: .3s ease-out;
+    height: 100%;
+}
+.inner img{
+    width: 1220px;
+    height: 300px;
+}
+
+.button-left {
+    position: absolute;
+    border: none;
+    top: 160px;
+    left: -30px;
+    width: 60px;
+    height: 60px;
+    background: url(https://cdn.visitkorea.or.kr/resources/images/main/btn_slider_prev01.png) no-repeat;
+    text-align: center;
+}
+.button-right {
+    position: absolute;
+    border: none;
+    top: 160px;
+    right: -30px;
+    width: 60px;
+    height: 60px;
+    background: url(https://cdn.visitkorea.or.kr/resources/images/main/btn_slider_next01.png) no-repeat;
+    text-align: center;
+}

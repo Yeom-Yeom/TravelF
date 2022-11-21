@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TravelF</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/ac79bf9ffb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/base1.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <script  type="text/javascript">
+        function Login()
+        {
+            const userid = document.getElementById('userid').value;
+            const passwd = document.getElementById('password').value;
+
+            if("" == userid){
+                alert("아이디를 입력하세요");
+                document.getElementById('userid').focus(); //입력포커스 이동
+                return; //함수 종료
+            }
+            if("" == passwd){
+                alert("비밀번호를 입력하세요");
+                document.getElementById('password').focus();
+                return;
+            }
+            //폼 내부의 데이터를 전송할 주소
+            //document.form.action= "${path}/mappers/login_check.do";
+            document.formLogin.action= "login_check";
+            document.formLogin.submit(); //제출
+        }
+
+        function Join()
+        {
+            document.formLogin.action= "Join";
+            document.formLogin.submit(); //제출
+        }
+    </script>
+
+
+</head>
+<body>
+<div th:replace="layout/header::header"></div>
+<th:block th:if="${Join_message} eq 'success'" >
+    <script>
+        alert('가입이 완료되었습니다.');
+    </script>
+</th:block>
+<th:block th:if="${login_message} eq 'error'" >
+    <script>
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+    </script>
+</th:block>
+<!--<span th:text="'로그아웃되었습니다.'" th:if="${message} eq 'logout'" style="color:red;"></span>-->
+
+<!--    <div class="container">-->
+<!--        <div class="content-box">-->
+<!--            <form name="formLogin" class="formLogin" method="post" >-->
+<!--                <div class="formLogin-logo">-->
+<!--                    <i class="fas fa-bars"></i>-->
+<!--                    <a href="/travelf">TravelF</a>-->
+<!--                </div>-->
+
+<!--                <div class="formLogin-Login">-->
+<!--                    <input type="text" id="userid" name="userid" placeholder="아이디" title="아이디" maxlength="25">-->
+<!--                    <input type="password" id="password" name="password" placeholder="비밀번호" title="비밀번호" maxlength="25">-->
+<!--                </div>-->
+
+<!--                <div class="formLogin-btnDATA">-->
+<!--                    &lt;!&ndash;<input type="submit" id="btnLogin" value="로그인">&ndash;&gt;-->
+<!--                    <button type="button" id="btnLogin" class="btnLogin" onclick=Login()>로그인</button>-->
+<!--                    <button type="button" id="btnJoin" onclick=Join()>회원가입</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<div class="login-box">
+    <h2>로그인</h2>
+    <form name="formLogin" class="formLogin" method="post">
+        <div class="user-box">
+            <input type="text" name="userid" id="userid" required="">
+            <label>ID</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" id="password" required="">
+            <label>PASSWORD</label>
+        </div>
+        <button type="button" id="btnLogin" class="btnLogin" onclick=Login()>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            로그인
+        </button>
+    </form>
+</div>
+</body>
+</html>
