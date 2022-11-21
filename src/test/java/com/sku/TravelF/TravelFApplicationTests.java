@@ -34,10 +34,5 @@ public class TravelFApplicationTests{
     @Test
     public void mainPage(){
 
-        //when
-        String body = this.restTemplate.getForObject("/", String.class);
-
-        //then
-        assertThat(body).contains("hello");
     }
 }
