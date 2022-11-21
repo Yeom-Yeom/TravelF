@@ -55,13 +55,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-jar{
-	enabled=false
-	manifest {
-		attributes 'Main-Class': 'com.package.application.MainClass'
+	jar{
+		enabled=false
 	}
 }
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
