@@ -16,7 +16,7 @@ jar {
 	enabled=false
 	manifest {
 		attributes(
-				'Main-Class': 'ac.kr.TravelF.TravelFApplication'
+				'Main-Class': 'com.mypackage.MyClass'
 		)
 	}
 }
