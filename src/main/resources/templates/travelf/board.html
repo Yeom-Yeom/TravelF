@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/board.css}" />
+    <link rel="stylesheet" th:href="@{/css/search.css}" />
 </head>
 <body>
     <th:block th:if="${board_message} eq 'fail'" >
@@ -116,9 +117,17 @@
                         </nav>
 
                         <div class="pull-right" th:if="${login_message} ne null">
-                            <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a>
+                            <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a><br>
                         </div>
                     </div>
+                    <form class="search" th:action="'/travelf/board?boardType='+${boardType}+'&Search='+${Search}" method="get">
+                        <div class="search">
+                            <input type="hidden" class="boardType" name="boardType" th:value="${boardType}"/>
+                            <input type="text" class="Search" name="Search" placeholder="검색하기"/>
+                            <button type="submit" hidden="hidden">검색</button>
+                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

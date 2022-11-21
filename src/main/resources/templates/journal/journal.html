@@ -7,6 +7,7 @@
     <title>TravelF</title>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/journal.css}" />
+    <link rel="stylesheet" th:href="@{/css/search.css}" />
 
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,14 +56,6 @@
     <div class="content-box">
         <div class="journal">
             <div class="aside" style="position: sticky; top: 20px; height: 100%;">
-                <form class="search" th:action="'/journal/journal?JournalType='+${JournalType}+'&AreaCode='+${AreaCode}+'&Search='+${Search}" method="get">
-                    <div class="search-by-user">
-                        <input type="hidden" class="JournalType" name="JournalType" th:value="${JournalType}"/>
-                        <input type="hidden" class="AreaCode" name="AreaCode" th:value="${AreaCode}"/>
-                        <input type="text" class="Search" name="Search"/>
-                        <button type="submit">검색하기</button>
-                    </div>
-                </form>
                 <h2>종류</h2>
                 <ul>
                     <a th:href="'/journal/journal?JournalType=0&AreaCode='+${AreaCode}"><li>모두의 일지</li></a>
@@ -143,10 +136,17 @@
                         <a th:href="'/journal/form?JournalType=' + ${JournalType} + '&AreaCode=' + ${AreaCode} + '&Search=' +${Search}" class="btn-block">등록</a>
                     </div>
                 </div>
-
-
             </div>
         </div>
+        <form class="search-form" th:action="'/journal/journal?JournalType='+${JournalType}+'&AreaCode='+${AreaCode}+'&Search='+${Search}" method="get">
+            <div class="search">
+                <input type="hidden" class="JournalType" name="JournalType" th:value="${JournalType}"/>
+                <input type="hidden" class="AreaCode" name="AreaCode" th:value="${AreaCode}"/>
+                <input type="text" class="Search" name="Search" placeholder="검색하기"/>
+                <button type="submit" hidden="hidden">검색</button>
+                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"/>
+            </div>
+        </form>
     </div>
 </div>
 </body>

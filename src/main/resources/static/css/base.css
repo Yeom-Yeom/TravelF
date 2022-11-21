@@ -142,6 +142,7 @@ body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
     text-align: center;
 }
 
+
 /* 모바일 */
 @media screen and (max-width: 768px) {
     .navbar{

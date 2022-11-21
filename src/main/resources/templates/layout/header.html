@@ -20,10 +20,10 @@
                             <a href="/user/Join"><b>회원가입</b></a>
                         </th:block>
                         <th:block th:if="${login_message} ne null" >
+                            <span th:text="${login_message} + '님 환영합니다.'" style="font-size:var(--font-medium)"></span>
                             <a href="/user/logout">
-                                <span th:text="${login_message} + '님 환영합니다.'"></span>
-                                <br>
-                                <font color="#c00000" ><b>로그아웃</b></font>
+                            <br>
+                            <font color="#c00000" ><b>로그아웃</b></font>
                             </a>
                         </th:block>
                     </li>
