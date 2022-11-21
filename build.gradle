@@ -58,6 +58,9 @@ dependencies {
 }
 jar{
 	enabled=false
+	manifest {
+		attributes 'Main-Class': 'com.package.application.MainClass'
+	}
 }
 tasks.named('test') {
 	useJUnitPlatform()
