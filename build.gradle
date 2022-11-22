@@ -61,12 +61,7 @@ dependencies {
 	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
-tasks {
 
-	processResources {
-		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
-	}
-}
 //tasks.named('test') {
 //	useJUnitPlatform()
 //}
