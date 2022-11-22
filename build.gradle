@@ -11,9 +11,10 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-
-jar {
-	enabled=false
+jar{
+	manifest {
+		attributes 'Main-Class': 'ac.kr.skuniv.TravelF.TravelFApplication'
+	}
 }
 dependencies {
 	/*implementation 'org.springframework.boot:spring-boot-starter-jdbc'
