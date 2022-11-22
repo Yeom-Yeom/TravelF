@@ -13,7 +13,7 @@ repositories {
 }
 jar{
 	manifest {
-		attributes 'Main-Class': 'com.package.application.MainClass'
+		attributes 'Main-Class': 'com.sku.TravelF.TravelFApplication'
 	}
 }
 dependencies {
