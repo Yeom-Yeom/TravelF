@@ -5,6 +5,7 @@
     <title>TravelF</title>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/region.css}" />
+    <link rel="stylesheet" th:href="@{/css/sidebar_region.css}" />
 
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,396 +17,428 @@
 </head>
 <body>
 <div th:replace="layout/header::header"></div>
-
 <div class="container">
-    <div class="content-box">
-        <div class="attr-box" >
-                    <div class="region_info">
-                        <h1>서울</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=1'">강남구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=2'">강동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=3'">강북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=4'">강서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=5'">관악구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=6'">광진구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=7'">구로구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=8'">금천구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=9'">노원구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=10'">도봉구</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=11'">동대문구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=12'">동작구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=13'">마포구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=14'">서대문구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=15'">서초구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=16'">성동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=17'">성북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=18'">송파구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=19'">양천구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=20'">영등포구</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=21'">용산구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=22'">은평구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=23'">종로구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=24'">중구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=25'">중랑구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>인천</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=1'">강화군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=2'">계양구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=3'">미추홀구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=4'">남동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=5'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=6'">부평구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=7'">서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=8'">연수구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=9'">옹진군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=10'">중구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>대전</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=1'">대덕구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=2'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=3'">서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=4'">유성구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=5'">중구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>대구</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=1'">남구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=2'">달서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=3'">달성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=4'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=5'">북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=6'">서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=7'">수성구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=8'">중구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>광주</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=1'">광산구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=2'">남구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=3'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=4'">북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=5'">서구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>부산</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=1'">강서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=2'">금정구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=3'">기장군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=4'">남구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=5'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=6'">동래구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=7'">부산진구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=8'">북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=9'">사상구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=10'">사하구</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=11'">서구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=12'">수영구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=13'">연제구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=14'">영도구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=15'">중구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=16'">해운대구</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>울산</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=1'">중구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=2'">남구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=3'">동구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=4'">북구</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=5'">울주군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>세종</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=8&sigunguCode=1'">세종특별자치시</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>경기도</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=1'">가평군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=2'">고양시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=3'">과천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=4'">광명시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=5'">광주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=6'">구리시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=7'">군포시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=8'">김포시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=9'">남양주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=10'">동두천시</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=11'">부천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=12'">성남시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=13'">수원시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=14'">시흥시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=15'">안산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=16'">안성시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=17'">안양시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=18'">양주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=19'">양평군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=20'">여주시</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=21'">연천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=22'">오산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=23'">용인시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=24'">의왕시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=25'">의정부시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=26'">이천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=27'">파주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=28'">평택시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=29'">포천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=30'">하남시</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=31'">화성시</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>강원도</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=1'">강릉시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=2'">고성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=3'">동해시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=4'">삼척시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=5'">속초시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=6'">양구군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=7'">양양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=8'">영월군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=9'">원주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=10'">인제군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=11'">정선군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=12'">철원군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=13'">춘천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=14'">태백시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=15'">평창군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=16'">홍천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=17'">화천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=18'">횡성군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>충북</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=1'">괴산군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=2'">단양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=3'">보은군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=4'">영동군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=5'">옥천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=6'">음성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=7'">제천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=8'">진천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=9'">청원군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=10'">청주시</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=11'">충주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=12'">증평군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>충남</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=1'">공주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=2'">금산군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=3'">논산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=4'">당진시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=5'">보령시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=6'">부여군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=7'">서산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=8'">서천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=9'">아산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=11'">예산군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=12'">천안시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=13'">청양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=14'">태안군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=15'">홍성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=16'">계룡시</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>경북</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=1'">경산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=2'">경주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=3'">고령군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=4'">구미시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=5'">군위군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=6'">김천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=7'">문경시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=8'">봉화군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=9'">상주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=10'">성주군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=11'">안동시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=12'">영덕군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=13'">영양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=14'">영주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=15'">영천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=16'">예천군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=17'">울릉군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=18'">울진군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=19'">의성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=20'">청도군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=21'">청송군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=22'">칠곡군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=23'">포항시</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>경남</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=1'">거제시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=2'">거창군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=3'">고성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=4'">김해시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=5'">남해군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=6'">마산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=7'">밀양시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=8'">사천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=9'">산청군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=10'">양산시</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=12'">의령군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=13'">진주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=14'">진해시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=15'">창녕군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=16'">창원시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=17'">통영시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=18'">하동군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=19'">함안군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=20'">함양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=21'">합천군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>전북</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=1'">고창군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=2'">군산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=3'">김제시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=4'">남원시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=5'">무주군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=6'">부안군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=7'">순창군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=8'">완주군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=9'">익산시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=10'">임실군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=11'">장수군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=12'">전주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=13'">정읍시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=14'">진안군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>전남</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=1'">강진군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=2'">고흥군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=3'">곡성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=4'">광양시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=5'">구례군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=6'">나주시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=7'">담양군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=8'">목포시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=9'">무안군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=10'">보성군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=11'">순천시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=12'">신안군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=13'">여수시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=16'">영광군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=17'">영암군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=18'">완도군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=19'">장성군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=20'">장흥군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=21'">진도군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=22'">함평군</a></div>
-                            </section>
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=23'">해남군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=24'">화순군</a></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="region_info">
-                        <h1>제주도</h1>
-                        <div class="region_main">
-                            <section>
-                                <div><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=1'">남제주군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=2'">북제주군</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=3'">서귀포시</a></div>
-                                <div><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=4'">제주시</a></div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>서울</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=1'"><Strong>강남구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=2'"><Strong>강동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=3'"><Strong>강북구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=4'"><Strong>강서구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=5'"><Strong>관악구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=6'"><Strong>광진구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=7'"><Strong>구로구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=8'"><Strong>금천구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=9'"><Strong>노원구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=10'"><Strong>도봉구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=11'"><Strong>동대문구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=12'"><Strong>동작구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=13'"><Strong>마포구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=14'"><Strong>서대문구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=15'"><Strong>서초구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=16'"><Strong>성동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=17'"><Strong>성북구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=18'"><Strong>송파구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=19'"><Strong>양천구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=20'"><Strong>영등포구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=21'"><Strong>용산구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=22'"><Strong>은평구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=23'"><Strong>종로구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=24'"><Strong>중구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=1&sigunguCode=25'"><Strong>중랑구</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>경기도</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=1'"><Strong>가평군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=2'"><Strong>고양시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=3'"><Strong>과천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=4'"><Strong>광명시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=5'"><Strong>광주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=6'"><Strong>구리시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=7'"><Strong>군포시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=8'"><Strong>김포시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=9'"><Strong>남양주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=10'"><Strong>동두천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=11'"><Strong>부천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=12'"><Strong>성남시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=13'"><Strong>수원시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=14'"><Strong>시흥시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=15'"><Strong>안산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=16'"><Strong>안성시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=17'"><Strong>안양시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=18'"><Strong>양주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=19'"><Strong>양평군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=20'"><Strong>여주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=21'"><Strong>연천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=22'"><Strong>오산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=23'"><Strong>용인시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=24'"><Strong>의왕시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=25'"><Strong>의정부시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=26'"><Strong>이천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=27'"><Strong>파주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=28'"><Strong>평택시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=29'"><Strong>포천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=30'"><Strong>하남시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=31&sigunguCode=31'"><Strong>화성시</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+    <ul class="mcd-menu">
+        <li>
+            <a>
+                <Strong>부산</Strong>
+            </a>
+            <ul>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=1'"><Strong>강서구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=2'"><Strong>금정구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=3'"><Strong>기장군</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=4'"><Strong>남구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=5'"><Strong>동구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=6'"><Strong>동래구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=7'"><Strong>부산진구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=8'"><Strong>북구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=9'"><Strong>사상구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=10'"><Strong>사하구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=11'"><Strong>서구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=12'"><Strong>수영구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=13'"><Strong>연제구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=14'"><Strong>영도구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=15'"><Strong>중구</Strong></a></li>
+                <li><a th:href="'/travelf/attractions?areaCode=6&sigunguCode=16'"><Strong>해운대구</Strong></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>경북</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=1'"><Strong>경산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=2'"><Strong>경주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=3'"><Strong>고령군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=4'"><Strong>구미시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=5'"><Strong>군위군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=6'"><Strong>김천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=7'"><Strong>문경시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=8'"><Strong>봉화군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=9'"><Strong>상주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=10'"><Strong>성주군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=11'"><Strong>안동시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=12'"><Strong>영덕군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=13'"><Strong>영양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=14'"><Strong>영주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=15'"><Strong>영천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=16'"><Strong>예천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=17'"><Strong>울릉군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=18'"><Strong>울진군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=19'"><Strong>의성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=20'"><Strong>청도군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=21'"><Strong>청송군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=22'"><Strong>칠곡군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=35&sigunguCode=23'"><Strong>포항시</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>경남</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=1'"><Strong>거제시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=2'"><Strong>거창군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=3'"><Strong>고성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=4'"><Strong>김해시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=5'"><Strong>남해군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=6'"><Strong>마산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=7'"><Strong>밀양시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=8'"><Strong>사천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=9'"><Strong>산청군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=10'"><Strong>양산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=12'"><Strong>의령군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=13'"><Strong>진주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=14'"><Strong>진해시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=15'"><Strong>창녕군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=16'"><Strong>창원시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=17'"><Strong>통영시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=18'"><Strong>하동군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=19'"><Strong>함안군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=20'"><Strong>함양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=36&sigunguCode=21'"><Strong>합천군</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>전북</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=1'"><Strong>강진군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=2'"><Strong>고흥군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=3'"><Strong>곡성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=4'"><Strong>광양시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=5'"><Strong>구례군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=6'"><Strong>나주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=7'"><Strong>담양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=8'"><Strong>목포시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=9'"><Strong>무안군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=10'"><Strong>보성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=11'"><Strong>순천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=12'"><Strong>신안군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=13'"><Strong>여수시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=16'"><Strong>영광군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=17'"><Strong>영암군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=18'"><Strong>완도군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=19'"><Strong>장성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=20'"><Strong>장흥군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=21'"><Strong>진도군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=22'"><Strong>함평군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=23'"><Strong>해남군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=38&sigunguCode=24'"><Strong>화순군</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>강원도</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=1'"><Strong>강릉시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=2'"><Strong>고성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=3'"><Strong>동해시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=4'"><Strong>삼척시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=5'"><Strong>속초시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=6'"><Strong>양구군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=7'"><Strong>양양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=8'"><Strong>영월군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=9'"><Strong>원주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=10'"><Strong>인제군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=11'"><Strong>정선군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=12'"><Strong>철원군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=13'"><Strong>춘천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=14'"><Strong>태백시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=15'"><Strong>평창군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=16'"><Strong>홍천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=17'"><Strong>화천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=32&sigunguCode=18'"><Strong>횡성군</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>충북</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=1'"><Strong>괴산군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=2'"><Strong>단양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=3'"><Strong>보은군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=4'"><Strong>영동군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=5'"><Strong>옥천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=6'"><Strong>음성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=7'"><Strong>제천시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=8'"><Strong>진천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=9'"><Strong>청원군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=10'"><Strong>청주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=11'"><Strong>충주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=33&sigunguCode=12'"><Strong>증평군</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>충남</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=1'"><Strong>공주시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=2'"><Strong>금산군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=3'"><Strong>논산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=4'"><Strong>당진시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=5'"><Strong>보령시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=6'"><Strong>부여군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=7'"><Strong>서산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=8'"><Strong>서천군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=9'"><Strong>아산시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=11'"><Strong>예산군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=12'"><Strong>천안시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=13'"><Strong>청양군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=14'"><Strong>태안군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=15'"><Strong>홍성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=34&sigunguCode=16'"><Strong>계룡시</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>전남</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=1'">고창군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=2'">군산시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=3'">김제시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=4'">남원시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=5'">무주군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=6'">부안군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=7'">순창군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=8'">완주군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=9'">익산시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=10'">임실군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=11'">장수군</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=12'">전주시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=13'">정읍시</a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=37&sigunguCode=14'">진안군</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>인천</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=1'"><Strong>강화군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=2'"><Strong>계양구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=3'"><Strong>미추홀구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=4'"><Strong>남동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=5'"><Strong>동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=6'"><Strong>부평구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=7'"><Strong>서구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=8'"><Strong>연수구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=9'"><Strong>옹진군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=2&sigunguCode=10'"><Strong>중구</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>대전</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=1'"><Strong>대덕구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=2'"><Strong>동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=3'"><Strong>서구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=4'"><Strong>유성구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=3&sigunguCode=5'"><Strong>중구</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>대구</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=1'"><Strong>남구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=2'"><Strong>달서구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=3'"><Strong>달성군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=4'"><Strong>동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=5'"><Strong>북구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=6'"><Strong>서구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=7'"><Strong>수성구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=4&sigunguCode=8'"><Strong>중구</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>광주</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=1'"><Strong>광산구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=2'"><Strong>남구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=3'"><Strong>동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=4'"><Strong>북구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=5&sigunguCode=5'"><Strong>서구</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>울산</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=1'"><Strong>중구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=2'"><Strong>남구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=3'"><Strong>동구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=4'"><Strong>북구</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=7&sigunguCode=5'"><Strong>울주군</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>세종</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=8&sigunguCode=1'"><Strong>세종특별자치시</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="mcd-menu">
+            <li>
+                <a>
+                    <Strong>제주도</Strong>
+                </a>
+                <ul>
+                    <li><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=1'"><Strong>남제주군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=2'"><Strong>북제주군</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=3'"><Strong>서귀포시</Strong></a></li>
+                    <li><a th:href="'/travelf/attractions?areaCode=39&sigunguCode=4'"><Strong>제주시</Strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>

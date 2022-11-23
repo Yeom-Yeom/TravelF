@@ -1,9 +1,17 @@
 .search {
     position: relative;
     width: 300px;
+    left : 150px;
+    top : 200px;
     align-content: center;
 }
-
+.search-journal {
+    position: relative;
+    width: 300px;
+    top : 200px;
+    left : 260px;
+    align-content: center;
+}
 input {
     width: 100%;
     border: 1px solid #bbb;
@@ -12,7 +20,7 @@ input {
     font-size: 14px;
 }
 
-img {
+.img-search {
     position : absolute;
     width: 17px;
     top: 10px;

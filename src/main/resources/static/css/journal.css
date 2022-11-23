@@ -1,6 +1,6 @@
 .container { justify-content: center; min-width: 1280px; }
 
-.journal { display: flex; width: 1220px; padding: 40px 30px;}
+.journal { display: flex; width: 1220px; padding: 40px 30px; padding-left:750px}
 .aside
 {
     height: inherit;
@@ -64,7 +64,7 @@
 .bottom-bar { display: flex; position: relative; justify-content: center; width: 1020px; }
 .pull-right { display: flex; }
 .pull-right a {
-    display: flex; position: absolute; right: 40px; width: 50px; height: 36.85px;
+    display: flex; position: absolute; right: 300px; width: 50px; height: 36.85px;
     align-items: center; justify-content:center; font-size: var(--font-small);
     color: #f0f4f5; border-radius: 4px; background-color: #337ab7;
     border-color: #337ab7; }

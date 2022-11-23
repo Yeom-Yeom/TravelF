@@ -3,7 +3,7 @@
 :root {
     --text-color: #140a00;
     --background-color: #fff;
-    --logo-color: #32B800;
+    --logo-color: #e67e22;
     --pull-color: rgb(100, 201, 100);
 
     /* color */
@@ -108,11 +108,13 @@ body{margin-bottom: 42px; --font-family: 'Source Sans Pro' }
 .member-menu li a:hover {
     border-radius: 4px; background-color: var(--logo-color);
     margin:1px;
+    opacity: 0.7;
 }
 
 .main-menu li:hover{
     border-radius: 4px; background-color: var(--logo-color);
     margin:1px;
+    opacity: 0.7;
 }
 
 /* main */

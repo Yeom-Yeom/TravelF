@@ -22,7 +22,7 @@
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/board.css}" />
     <link rel="stylesheet" th:href="@{/css/search.css}" />
-    <link rel="stylesheet" th:href="@{/css/sidebar.scss}" />
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}" />
 
 </head>
 <body>
@@ -55,16 +55,22 @@
     <div th:replace="layout/header::header"></div>
 
     <div class="container">
+        <div class="sidebar-container">
+            <nav>
+                <ul class="mcd-menu">
+                    <li><a th:href="'/travelf/board?boardType=전체'">
+                        <Strong>전체</Strong>
+                    </a></li>
+                    <li><a th:href="'/travelf/board?boardType=공지사항'">
+                        <Strong>공지사항</Strong>
+                    </a></li>
+                    <li><a th:href="'/travelf/board?boardType=자유게시판'">
+                        <Strong>자유게시판</Strong>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
         <div class="content-box">
-            <div class="nav-wrap">
-                <nav class="main-nav" role="navigation">
-                    <ul class="unstyled list-hover-slide">
-                        <li><a th:href="'/travelf/board?boardType=전체'">전체</a></li>
-                        <li><a th:href="'/travelf/board?boardType=공지사항'">공지사항</a></li>
-                        <li><a th:href="'/travelf/board?boardType=자유게시판'">자유게시판</a></li>
-                    </ul>
-                </nav>
-            </div>
             <h1 class="hidden">게시글 목록</h1>
             <div class="board" >
                 <div class="board-list" >
@@ -116,12 +122,11 @@
                                 </th:block >
                             </ul>
                         </nav>
-
-                        <div class="pull-right" th:if="${login_message} ne null">
-                            <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a>
-                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="pull-right" th:if="${login_message} ne null">
+                <a th:href="'/travelf/form?boardType=' + ${boardType} + '&Search=' +${Search}" class="btn-block">등록</a>
             </div>
             <form class="search" th:action="'/travelf/board?boardType='+${boardType}+'&Search='+${Search}" method="get">
                 <div class="search">
@@ -131,7 +136,6 @@
                     <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"/>
                 </div>
             </form>
-
         </div>
     </div>
 </body>
