@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 @Controller
 @RequestMapping("/recommended/*")
-@CrossOrigin(origins = "http://127.0.0.1:5000")
+@CrossOrigin(origins = "http://ec2-3-34-52-170.ap-northeast-2.compute.amazonaws.com:5000")
 @RequiredArgsConstructor
 public class RecommendedController {
     private final RecommendedService recommendedService;

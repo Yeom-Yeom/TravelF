@@ -1,5 +1,5 @@
 
-.container { justify-content: center; min-width: 1280px; }
+.container { justify-content: center; min-width: 1280px; height:100% }
 .board { display: flex; padding: 40px 30px; }
 .board-main{ display:flex; flex-direction: column; justify-items: center; align-items: center;}
 

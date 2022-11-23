@@ -28,10 +28,10 @@ time.sleep(1)
 #time.sleep(2)
 
 conn = MySQLdb.connect(
-    user="diting9813@skuniv.ac.kr",
-    passwd="1234",
-    host="54.193.207.124",
-    db="user"
+    user="diting981113@gmail.com",
+    passwd="y2kxtom16spu!",
+    host="ec2-3-39-1-201.ap-northeast-2.compute.amazonaws.com",
+    db="TravelF"
     # charset="utf-8"
 )
 # print(type(conn))
@@ -49,8 +49,8 @@ cursor = conn.cursor()
 driver.find_element(By.XPATH,'//*[@id="contents"]/div[2]/div[2]/div[2]/ul[2]/li[@id=39]').click() #areaList
 time.sleep(1)
 #driver.find_element(By.XPATH,'//*[@id="contents"]/div[2]/div[2]/div[2]/ul[3]/li[@id=9]').click() #sigunguList
-time.sleep(30)
-for page in range(192, 201):
+time.sleep(1)
+for page in range(1, 453):
     if page%5==1 and page!=1:
         if page==6:
             driver.find_element(By.XPATH,'//*[@id="contents"]/div[2]/div[1]/div[2]/a[6]').click()
