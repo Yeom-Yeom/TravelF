@@ -129,7 +129,7 @@ public class JournalServiceImpl implements JournalService{
         }else{
             file.transferTo (saveFile);
             journal.setFileName (fileName);
-            journal.setUploadPath ("/image/" + fileName);
+            journal.setUploadPath ("/home/ec2-user/app/step1/TravelF/src/main/resources/static/image/" + fileName);
         }
         Journal saved = journalRepository.save (journal);
         //image.setJournal (saved);
