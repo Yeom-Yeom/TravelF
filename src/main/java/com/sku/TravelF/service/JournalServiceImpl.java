@@ -111,7 +111,7 @@ public class JournalServiceImpl implements JournalService{
     // 게시글 저장
     public void save(Journal journal, MultipartFile file) throws Exception{
 
-        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\resources\\image";
+        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
         UUID uuid = UUID.randomUUID ();
         String fileName = uuid + "_" + file.getOriginalFilename ();
         File saveFile = new File (ProjectPath, fileName);
@@ -141,7 +141,7 @@ public class JournalServiceImpl implements JournalService{
     public void deleteById(Long id){
         Optional<Journal> find = journalRepository.findById (id);
         //파일 경로 지정
-        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\resources\\image";
+        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
         //현재 게시판에 존재하는 파일객체를 만듬
         File savedFile = new File (ProjectPath, find.get ().getFileName ());
 
