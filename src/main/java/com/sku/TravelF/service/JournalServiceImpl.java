@@ -4,6 +4,7 @@ import com.sku.TravelF.domain.Journal;
 import com.sku.TravelF.domain.enums.JournalType;
 import com.sku.TravelF.repository.JournalRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JournalServiceImpl implements JournalService{
@@ -111,11 +113,14 @@ public class JournalServiceImpl implements JournalService{
     // 게시글 저장
     public void save(Journal journal, MultipartFile file) throws Exception{
 
-        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
+       // String ProjectPath = System.getProperty ("user.dir") + "~/app/step1/TravelF/src/main/webapp/image";
+        String ProjectPath = "/home/ec2-user/app/step1/TravelF/src/main/resources/static/image";
+        ///home/ec2-user/app/step1/TravelF/src/main/webapp/image;
+
         UUID uuid = UUID.randomUUID ();
         String fileName = uuid + "_" + file.getOriginalFilename ();
         File saveFile = new File (ProjectPath, fileName);
-
+        log.info("file: {}", saveFile);
 
         //Image image = new Image ();
         //image.setFileName (fileName);
@@ -124,7 +129,7 @@ public class JournalServiceImpl implements JournalService{
         }else{
             file.transferTo (saveFile);
             journal.setFileName (fileName);
-            journal.setUploadPath ("/image/" + fileName);
+            journal.setUploadPath ("/home/ec2-user/app/step1/TravelF/src/main/resources/static/image/" + fileName);
         }
         Journal saved = journalRepository.save (journal);
         //image.setJournal (saved);
@@ -140,8 +145,8 @@ public class JournalServiceImpl implements JournalService{
     // 게시글 삭제
     public void deleteById(Long id){
         Optional<Journal> find = journalRepository.findById (id);
-        //파일 경로 지정
-        String ProjectPath = System.getProperty ("user.dir") + "\\src\\main\\webapp\\image";
+        //파일 경로 지정String ProjectPath = System.getProperty ("user.dir") + "/src/main/webapp/image";
+        String ProjectPath = "/home/ec2-user/app/step1/TravelF/src/main/resources/static/image";
         //현재 게시판에 존재하는 파일객체를 만듬
         File savedFile = new File (ProjectPath, find.get ().getFileName ());
 
